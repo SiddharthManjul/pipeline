@@ -42,3 +42,6 @@ lerna-debug.log*
 # Prisma
 prisma/dev.db
 prisma/migrations
+
+bun.lock
+package-lock.json
