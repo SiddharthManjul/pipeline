@@ -74,4 +74,17 @@ export class UsersService {
   async countUsers(where?: Prisma.UserWhereInput): Promise<number> {
     return this.prisma.user.count({ where });
   }
+
+  // Helper methods for auth
+  async findByEmail(email: string): Promise<User | null> {
+    return this.getUserByEmail(email);
+  }
+
+  async findById(id: string): Promise<User | null> {
+    return this.user({ id });
+  }
+
+  async create(data: Prisma.UserCreateInput): Promise<User> {
+    return this.createUser(data);
+  }
 }
