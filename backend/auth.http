@@ -1,0 +1,110 @@
+### Variables
+@baseUrl = http://localhost:3001/api
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YzI4YzA3ZS04ODJhLTQ5M2ItOTU2OS01ZjQwNWI4MzdhMzMiLCJlbWFpbCI6ImZvdW5kZXJAdGVzdC5jb20iLCJyb2xlIjoiRk9VTkRFUiIsImlhdCI6MTc2NjAwNTMwOCwiZXhwIjoxNzY4NTk3MzA4fQ.gCdnvxbvh8EgEw0CFsaJrVNHrnpp0Uo6KM5CXdCuCzw
+@refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YzI4YzA3ZS04ODJhLTQ5M2ItOTU2OS01ZjQwNWI4MzdhMzMiLCJlbWFpbCI6ImZvdW5kZXJAdGVzdC5jb20iLCJyb2xlIjoiRk9VTkRFUiIsImlhdCI6MTc2NjAwNTMwOCwiZXhwIjoxNzgxNTU3MzA4fQ.2KxwY46yB25iVYbHtfLdDfSnahimMH7n_mHSeJh4Urk
+
+###############################################
+# 1. Health Check (Public)
+###############################################
+
+### Get API health status
+GET {{baseUrl}}/health
+
+###############################################
+# 2. User Registration (Public)
+###############################################
+
+### Register a new developer
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "developer2@test.com",
+  "password": "Test123456",
+  "role": "DEVELOPER"
+}
+
+### Register a new founder
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "founder@test.com",
+  "password": "Test12345",
+  "role": "FOUNDER"
+}
+
+###############################################
+# 3. User Login (Public)
+###############################################
+
+### Login developer
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "developer@test.com",
+  "password": "Test12345"
+}
+
+### Login founder
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "founder@test.com",
+  "password": "Test12345"
+}
+
+###############################################
+# 4. Get Current User (Protected)
+###############################################
+
+### Get current user profile
+# NOTE: Replace {{accessToken}} with actual token from login response
+GET {{baseUrl}}/auth/me
+Authorization: Bearer {{accessToken}}
+
+###############################################
+# 5. Refresh Token (Public)
+###############################################
+
+### Refresh access token
+# NOTE: Replace {{refreshToken}} with actual refresh token from login
+POST {{baseUrl}}/auth/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+
+###############################################
+# 6. GitHub OAuth (Public)
+###############################################
+
+### Initiate GitHub OAuth
+# NOTE: Open this in browser, not REST Client
+GET {{baseUrl}}/auth/github
+
+###############################################
+# Test Scenarios
+###############################################
+
+### Scenario 1: Complete Registration Flow
+# 1. Register user (run above)
+# 2. Copy accessToken from response
+# 3. Paste it in @accessToken variable at top
+# 4. Run "Get current user profile"
+
+### Scenario 2: Login Flow
+# 1. Login (run above)
+# 2. Copy accessToken from response
+# 3. Update @accessToken variable
+# 4. Test protected endpoints
+
+### Scenario 3: Token Refresh
+# 1. Login and get refreshToken
+# 2. Update @refreshToken variable
+# 3. Run refresh endpoint
+# 4. Get new accessToken
+
