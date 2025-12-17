@@ -132,4 +132,15 @@ export class DevelopersService {
   async countDevelopers(where?: Prisma.DeveloperWhereInput): Promise<number> {
     return this.prisma.developer.count({ where });
   }
+
+  // Helper methods for profile service
+  async findDeveloperByUserId(userId: string): Promise<Developer | null> {
+    return this.prisma.developer.findUnique({
+      where: { userId },
+    });
+  }
+
+  async findDeveloperByUsername(username: string): Promise<Developer | null> {
+    return this.getDeveloperByUsername(username);
+  }
 }

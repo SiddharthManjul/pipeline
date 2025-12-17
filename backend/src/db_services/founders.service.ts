@@ -71,4 +71,11 @@ export class FoundersService {
   async countFounders(where?: Prisma.FounderWhereInput): Promise<number> {
     return this.prisma.founder.count({ where });
   }
+
+  // Helper methods for profile service
+  async findFounderByUserId(userId: string): Promise<Founder | null> {
+    return this.prisma.founder.findUnique({
+      where: { userId },
+    });
+  }
 }

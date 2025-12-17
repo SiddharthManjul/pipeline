@@ -106,4 +106,16 @@ export class ProjectsService {
   async countProjects(where?: Prisma.ProjectWhereInput): Promise<number> {
     return this.prisma.project.count({ where });
   }
+
+  // Helper methods for profile controller
+  async findProjectById(projectId: string): Promise<Project | null> {
+    return this.project({ id: projectId });
+  }
+
+  async findProjectsByDeveloper(developerId: string): Promise<Project[]> {
+    return this.projects({
+      where: { developerId },
+      orderBy: { createdAt: 'desc' },
+    });
+  }
 }
