@@ -108,3 +108,130 @@ GET {{baseUrl}}/auth/github
 # 3. Run refresh endpoint
 # 4. Get new accessToken
 
+###############################################
+# 7. Profile Management (Protected)
+###############################################
+
+### Get my full profile
+GET {{baseUrl}}/profile/me
+Authorization: Bearer {{accessToken}}
+
+### Create developer profile
+POST {{baseUrl}}/profile/me
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "username": "johndoe",
+  "fullName": "John Doe",
+  "contactNumber": "+1234567890",
+  "github": "https://github.com/johndoe",
+  "twitter": "https://twitter.com/johndoe",
+  "linkedin": "https://linkedin.com/in/johndoe",
+  "bio": "Full-stack Web3 developer with 5 years of experience",
+  "location": "San Francisco, CA",
+  "availability": "AVAILABLE"
+}
+
+### Create founder profile
+POST {{baseUrl}}/profile/me
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "companyName": "Web3 Startup Inc",
+  "position": "CEO & Founder",
+  "companyWebsite": "https://web3startup.com",
+  "bio": "Building the future of decentralized applications",
+  "linkedinUrl": "https://linkedin.com/in/founder"
+}
+
+### Update developer profile
+PATCH {{baseUrl}}/profile/me
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "bio": "Updated bio: Experienced Solidity developer",
+  "availability": "BUSY",
+  "location": "Remote"
+}
+
+###############################################
+# 8. Project Management (Protected - Developers Only)
+###############################################
+
+### Get my projects
+GET {{baseUrl}}/profile/me/projects
+Authorization: Bearer {{accessToken}}
+
+### Create a new project
+POST {{baseUrl}}/profile/me/projects
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "name": "DeFi Trading Platform",
+  "description": "A decentralized exchange built on Ethereum with advanced trading features and liquidity pools",
+  "livePlatformUrl": "https://defi-platform.example.com",
+  "repositoryUrl": "https://github.com/johndoe/defi-platform",
+  "teammateNames": ["Alice Smith", "Bob Johnson"],
+  "technologies": ["Solidity", "React", "TypeScript", "Hardhat", "Ethers.js"]
+}
+
+### Update a project
+# Replace {projectId} with actual project ID
+PATCH {{baseUrl}}/profile/me/projects/{projectId}
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "description": "Updated description with new features",
+  "technologies": ["Solidity", "React", "TypeScript", "Hardhat", "Ethers.js", "The Graph"]
+}
+
+### Delete a project
+# Replace {projectId} with actual project ID
+DELETE {{baseUrl}}/profile/me/projects/{projectId}
+Authorization: Bearer {{accessToken}}
+
+###############################################
+# 9. Browse Developers (Public)
+###############################################
+
+### Get all developers
+GET {{baseUrl}}/developers
+
+### Get developers with filters
+GET {{baseUrl}}/developers?tier=TIER_1&availability=AVAILABLE&limit=10
+
+### Search developers
+GET {{baseUrl}}/developers?search=blockchain&minReputation=50
+
+### Get developers by location
+GET {{baseUrl}}/developers?location=San Francisco&orderBy=reputation
+
+### Get developer by ID
+# Replace {developerId} with actual developer ID
+GET {{baseUrl}}/developers/{developerId}
+
+### Get developer's projects
+# Replace {developerId} with actual developer ID
+GET {{baseUrl}}/developers/{developerId}/projects
+
+### Get developer's reputation
+# Replace {developerId} with actual developer ID
+GET {{baseUrl}}/developers/{developerId}/reputation
+
+###############################################
+# Complete Workflow Example
+###############################################
+
+### Workflow: Developer Registration to Project Creation
+# 1. Register as developer
+# 2. Login and get accessToken
+# 3. Create developer profile
+# 4. Create first project
+# 5. View profile
+# 6. Browse other developers (public)
+
