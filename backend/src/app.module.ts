@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module.js';
 import { ProfileModule } from './profile/profile.module.js';
 import { DevelopersModule } from './developers/developers.module.js';
 import { GithubModule } from './github/github.module.js';
+import { ReputationModule } from './reputation/reputation.module.js';
 import { JwtAuthGuard } from './auth/guards/index.js';
 
 @Module({
@@ -22,6 +23,7 @@ import { JwtAuthGuard } from './auth/guards/index.js';
     ProfileModule,
     DevelopersModule,
     GithubModule,
+    ReputationModule,
   ],
   controllers: [AppController],
   providers: [
