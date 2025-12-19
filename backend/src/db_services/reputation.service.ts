@@ -93,13 +93,16 @@ export class ReputationService {
     });
   }
 
-  async calculateAndUpdateReputation(developerId: string, scores: {
-    githubScore: number;
-    projectsScore: number;
-    timeScore: number;
-    hackathonsScore: number;
-    communityScore: number;
-  }) {
+  async calculateAndUpdateReputation(
+    developerId: string,
+    scores: {
+      githubScore: number;
+      projectsScore: number;
+      timeScore: number;
+      hackathonsScore: number;
+      communityScore: number;
+    },
+  ) {
     const totalScore =
       scores.githubScore * 0.3 +
       scores.projectsScore * 0.25 +
