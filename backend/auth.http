@@ -224,6 +224,45 @@ GET {{baseUrl}}/developers/{developerId}/projects
 GET {{baseUrl}}/developers/{developerId}/reputation
 
 ###############################################
+# 10. GitHub Integration (Mixed - Public & Protected)
+###############################################
+
+### Get GitHub profile by username (Public)
+GET {{baseUrl}}/github/profile/vitalik
+
+### Get GitHub profile statistics (Public)
+GET {{baseUrl}}/github/stats/vitalik
+
+### Get GitHub repositories (Public)
+GET {{baseUrl}}/github/repositories/vitalik
+
+### Validate GitHub repository URL (Public)
+POST {{baseUrl}}/github/validate-repository
+Content-Type: application/json
+
+{
+  "repositoryUrl": "https://github.com/ethereum/go-ethereum"
+}
+
+### Sync my GitHub data (Protected - Developers only)
+POST {{baseUrl}}/github/sync/me
+Authorization: Bearer {{accessToken}}
+
+### Sync GitHub data by username (Protected - Developers only)
+POST {{baseUrl}}/github/sync/username
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "githubUsername": "vitalik"
+}
+
+### Sync GitHub data for specific developer (Protected)
+# Replace {developerId} with actual developer ID
+POST {{baseUrl}}/github/sync/{developerId}
+Authorization: Bearer {{accessToken}}
+
+###############################################
 # Complete Workflow Example
 ###############################################
 
