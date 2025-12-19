@@ -263,6 +263,39 @@ POST {{baseUrl}}/github/sync/{developerId}
 Authorization: Bearer {{accessToken}}
 
 ###############################################
+# 11. Reputation System (Mixed - Public & Protected)
+###############################################
+
+### Calculate my reputation (Protected - Developers only)
+POST {{baseUrl}}/reputation/calculate/me
+Authorization: Bearer {{accessToken}}
+
+### Calculate reputation for specific developer (Protected)
+# Replace {developerId} with actual developer ID
+POST {{baseUrl}}/reputation/calculate/{developerId}
+Authorization: Bearer {{accessToken}}
+
+### Get reputation score for a developer (Public)
+# Replace {developerId} with actual developer ID
+GET {{baseUrl}}/reputation/{developerId}
+
+### Get reputation history for a developer (Public)
+# Replace {developerId} with actual developer ID
+GET {{baseUrl}}/reputation/{developerId}/history
+
+### Get my reputation score (Protected - Developers only)
+GET {{baseUrl}}/reputation/me/score
+Authorization: Bearer {{accessToken}}
+
+### Get my reputation history (Protected - Developers only)
+GET {{baseUrl}}/reputation/me/history
+Authorization: Bearer {{accessToken}}
+
+### Recalculate all developer reputations (Admin only)
+POST {{baseUrl}}/reputation/recalculate-all
+Authorization: Bearer {{accessToken}}
+
+###############################################
 # Complete Workflow Example
 ###############################################
 
