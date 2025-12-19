@@ -8,6 +8,7 @@ import { DbServicesModule } from './db_services/index.js';
 import { AuthModule } from './auth/auth.module.js';
 import { ProfileModule } from './profile/profile.module.js';
 import { DevelopersModule } from './developers/developers.module.js';
+import { GithubModule } from './github/github.module.js';
 import { JwtAuthGuard } from './auth/guards/index.js';
 
 @Module({
@@ -20,6 +21,7 @@ import { JwtAuthGuard } from './auth/guards/index.js';
     AuthModule,
     ProfileModule,
     DevelopersModule,
+    GithubModule,
   ],
   controllers: [AppController],
   providers: [
