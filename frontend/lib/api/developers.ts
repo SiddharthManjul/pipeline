@@ -7,14 +7,14 @@ import type {
 
 export const developersApi = {
   // Get all developers with filters
-  getAll: async (params?: DeveloperFilterParams) => {
+  getAll: async (params?: DeveloperFilterParams): Promise<Developer[]> => {
     const { data } = await apiClient.get<{
       developers: Developer[];
       total: number;
       limit: number;
       skip: number;
     }>('/developers', { params });
-    return data;
+    return data.developers;
   },
 
   // Get developer by ID
