@@ -50,37 +50,37 @@ export function GitHubStatsCard({ username }: GitHubStatsCardProps) {
   const statItems = [
     {
       label: 'Public Repos',
-      value: stats.publicRepos,
+      value: stats.publicRepos || 0,
       icon: BookOpen,
       color: 'text-blue-500',
     },
     {
       label: 'Total Stars',
-      value: stats.totalStars,
+      value: stats.totalStars || 0,
       icon: Star,
       color: 'text-yellow-500',
     },
     {
       label: 'Total Forks',
-      value: stats.totalForks,
+      value: stats.totalForks || 0,
       icon: GitFork,
       color: 'text-green-500',
     },
     {
       label: 'Pull Requests',
-      value: stats.pullRequests,
+      value: stats.pullRequests || 0,
       icon: GitPullRequest,
       color: 'text-purple-500',
     },
     {
       label: 'Total Commits',
-      value: stats.totalCommits,
+      value: stats.totalCommits || 0,
       icon: GitCommit,
       color: 'text-orange-500',
     },
     {
       label: 'Followers',
-      value: stats.followers,
+      value: stats.followers || 0,
       icon: BookOpen,
       color: 'text-pink-500',
     },
