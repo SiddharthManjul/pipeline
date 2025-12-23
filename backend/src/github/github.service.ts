@@ -35,9 +35,12 @@ export interface GitHubRepository {
 export interface GitHubStats {
   profile: GitHubProfile;
   repositories: GitHubRepository[];
+  publicRepos: number;
   totalStars: number;
   totalForks: number;
   totalCommits: number;
+  pullRequests: number;
+  followers: number;
   languages: Record<string, number>;
   contributionScore: number;
 }
@@ -107,32 +110,55 @@ export class GithubService {
   }
 
   /**
-   * Fetch all public repositories for a user
+   * Fetch all public repositories for a user (with pagination)
    */
   async getGitHubRepositories(username: string): Promise<GitHubRepository[]> {
     try {
-      const { data } = await this.octokit.repos.listForUser({
-        username,
-        type: 'owner',
-        sort: 'updated',
-        per_page: 100,
-      });
+      const allRepos: GitHubRepository[] = [];
+      let page = 1;
+      let hasMore = true;
 
-      return data.map((repo) => ({
-        name: repo.name,
-        full_name: repo.full_name,
-        description: repo.description || '',
-        html_url: repo.html_url,
-        stargazers_count: repo.stargazers_count || 0,
-        forks_count: repo.forks_count || 0,
-        language: repo.language || '',
-        languages_url: repo.languages_url,
-        topics: repo.topics || [],
-        is_fork: repo.fork,
-        created_at: repo.created_at || '',
-        updated_at: repo.updated_at || '',
-        pushed_at: repo.pushed_at || '',
-      }));
+      // Fetch all pages
+      while (hasMore) {
+        const { data } = await this.octokit.repos.listForUser({
+          username,
+          type: 'owner',
+          sort: 'updated',
+          per_page: 100,
+          page,
+        });
+
+        if (data.length === 0) {
+          hasMore = false;
+        } else {
+          const repos = data.map((repo) => ({
+            name: repo.name,
+            full_name: repo.full_name,
+            description: repo.description || '',
+            html_url: repo.html_url,
+            stargazers_count: repo.stargazers_count || 0,
+            forks_count: repo.forks_count || 0,
+            language: repo.language || '',
+            languages_url: repo.languages_url,
+            topics: repo.topics || [],
+            is_fork: repo.fork,
+            created_at: repo.created_at || '',
+            updated_at: repo.updated_at || '',
+            pushed_at: repo.pushed_at || '',
+          }));
+
+          allRepos.push(...repos);
+
+          // If we got less than 100, we've reached the end
+          if (data.length < 100) {
+            hasMore = false;
+          } else {
+            page++;
+          }
+        }
+      }
+
+      return allRepos;
     } catch (error: any) {
       this.logger.error(
         `Failed to fetch repositories for ${username}`,
@@ -146,21 +172,78 @@ export class GithubService {
   }
 
   /**
+   * Get total contributions from GitHub GraphQL API (most accurate)
+   */
+  async getTotalCommits(username: string): Promise<number> {
+    try {
+      const currentYear = new Date().getFullYear();
+      const fromDate = `${currentYear}-01-01T00:00:00Z`;
+      const toDate = `${currentYear}-12-31T23:59:59Z`;
+
+      const query = `
+        query {
+          user(login: "${username}") {
+            contributionsCollection(from: "${fromDate}", to: "${toDate}") {
+              contributionCalendar {
+                totalContributions
+              }
+            }
+          }
+        }
+      `;
+
+      const response: any = await this.octokit.graphql(query);
+
+      return response.user.contributionsCollection.contributionCalendar.totalContributions || 0;
+    } catch (error: any) {
+      this.logger.warn(`Failed to fetch contributions for ${username}`, error);
+      return 0;
+    }
+  }
+
+  /**
+   * Get total pull request count for a user (current year)
+   */
+  async getTotalPullRequests(username: string): Promise<number> {
+    try {
+      const currentYear = new Date().getFullYear();
+      const startDate = `${currentYear}-01-01`;
+
+      const { data } = await this.octokit.search.issuesAndPullRequests({
+        q: `author:${username} type:pr created:>=${startDate}`,
+        per_page: 1,
+      });
+
+      return data.total_count || 0;
+    } catch (error: any) {
+      this.logger.warn(`Failed to fetch PR count for ${username}`, error);
+      return 0;
+    }
+  }
+
+  /**
    * Get comprehensive GitHub statistics for a user
    */
   async getGitHubStats(username: string): Promise<GitHubStats> {
     const profile = await this.getGitHubProfile(username);
     const repositories = await this.getGitHubRepositories(username);
 
-    // Filter out forked repositories for accurate stats
+    // Get total commits and PRs (current year)
+    const [totalCommits, pullRequests] = await Promise.all([
+      this.getTotalCommits(username),
+      this.getTotalPullRequests(username),
+    ]);
+
+    // Filter out forked repositories for contribution score calculation
     const ownRepos = repositories.filter((repo) => !repo.is_fork);
 
-    // Calculate total stars and forks
-    const totalStars = ownRepos.reduce(
+    // Calculate total stars and forks from ALL repos (including forks)
+    // This matches what users see on their GitHub profile
+    const totalStars = repositories.reduce(
       (sum, repo) => sum + repo.stargazers_count,
       0,
     );
-    const totalForks = ownRepos.reduce(
+    const totalForks = repositories.reduce(
       (sum, repo) => sum + repo.forks_count,
       0,
     );
@@ -184,9 +267,12 @@ export class GithubService {
     return {
       profile,
       repositories: ownRepos,
+      publicRepos: profile.public_repos,
       totalStars,
       totalForks,
-      totalCommits: 0, // Will be enhanced with commit counting later
+      totalCommits,
+      pullRequests,
+      followers: profile.followers,
       languages,
       contributionScore,
     };
@@ -336,9 +422,12 @@ export class GithubService {
       return {
         message: 'GitHub data synced successfully',
         stats: {
-          totalRepos: stats.repositories.length,
+          publicRepos: stats.publicRepos,
           totalStars: stats.totalStars,
           totalForks: stats.totalForks,
+          totalCommits: stats.totalCommits,
+          pullRequests: stats.pullRequests,
+          followers: stats.followers,
           contributionScore: stats.contributionScore,
           languages: stats.languages,
         },
