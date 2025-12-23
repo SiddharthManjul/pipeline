@@ -20,14 +20,16 @@ export class ProjectsService {
     cursor?: Prisma.ProjectWhereUniqueInput;
     where?: Prisma.ProjectWhereInput;
     orderBy?: Prisma.ProjectOrderByWithRelationInput;
-  }): Promise<Project[]> {
-    const { skip, take, cursor, where, orderBy } = params;
+    include?: Prisma.ProjectInclude;
+  }): Promise<any[]> {
+    const { skip, take, cursor, where, orderBy, include } = params;
     return this.prisma.project.findMany({
       skip,
       take,
       cursor,
       where,
       orderBy,
+      include,
     });
   }
 
