@@ -14,10 +14,6 @@ export const projectSchema = z.object({
     .string()
     .url('Must be a valid URL')
     .includes('github.com', { message: 'Must be a GitHub repository URL' }),
-  teammateNames: z.array(z.string()).optional().default([]),
-  technologies: z
-    .array(z.string().min(1, 'Technology name cannot be empty'))
-    .min(1, 'At least one technology is required'),
 });
 
 export const updateProjectSchema = projectSchema.partial();
