@@ -61,6 +61,7 @@ export interface DeveloperFilterParams {
   minReputation?: number;
   location?: string;
   search?: string;
+  skills?: string[];
   limit?: number;
   skip?: number;
   orderBy?: 'reputation' | 'recent' | 'alphabetical';

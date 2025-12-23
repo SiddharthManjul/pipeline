@@ -1,3 +1,5 @@
+import { DeveloperTier } from './auth';
+
 export interface Project {
   id: string;
   developerId: string;
@@ -12,6 +14,13 @@ export interface Project {
   isVerified: boolean;
   createdAt: string;
   updatedAt: string;
+  developer?: {
+    id: string;
+    username: string;
+    fullName: string;
+    tier: DeveloperTier;
+    bio?: string;
+  };
 }
 
 export interface CreateProjectDto {
