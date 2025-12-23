@@ -1,5 +1,5 @@
 import apiClient from './client';
-import type { Project } from '@/types';
+import type { Project, CreateProjectDto, UpdateProjectDto } from '@/types';
 
 export interface ProjectFilterParams {
   search?: string;
@@ -30,6 +30,23 @@ export const projectsApi = {
   getById: async (id: string): Promise<Project> => {
     const { data } = await apiClient.get<Project>(`/projects/${id}`);
     return data;
+  },
+
+  // Create new project
+  create: async (projectData: CreateProjectDto): Promise<Project> => {
+    const { data } = await apiClient.post<Project>('/profile/me/projects', projectData);
+    return data;
+  },
+
+  // Update project
+  update: async (id: string, projectData: UpdateProjectDto): Promise<Project> => {
+    const { data } = await apiClient.patch<Project>(`/profile/me/projects/${id}`, projectData);
+    return data;
+  },
+
+  // Delete project
+  delete: async (id: string): Promise<void> => {
+    await apiClient.delete(`/profile/me/projects/${id}`);
   },
 
   // Validate repository URL

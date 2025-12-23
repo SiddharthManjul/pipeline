@@ -15,11 +15,16 @@ export interface GitHubProfile {
 
 export interface GitHubStats {
   profile: GitHubProfile;
-  totalRepos: number;
+  publicRepos: number;
   totalStars: number;
   totalForks: number;
+  totalCommits: number;
+  pullRequests: number;
+  followers: number;
   contributionScore: number;
   languages: Record<string, number>;
+  repositories: any[];
+  lastSyncedAt?: string;
 }
 
 export interface RepositoryValidation {
