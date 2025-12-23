@@ -224,7 +224,27 @@ GET {{baseUrl}}/developers/{developerId}/projects
 GET {{baseUrl}}/developers/{developerId}/reputation
 
 ###############################################
-# 10. GitHub Integration (Mixed - Public & Protected)
+# 10. Projects Directory (Public)
+###############################################
+
+### Get all projects
+GET {{baseUrl}}/projects
+
+### Get projects with filters
+GET {{baseUrl}}/projects?technologies=React,TypeScript&limit=10
+
+### Get verified projects only
+GET {{baseUrl}}/projects?isVerified=true
+
+### Search projects
+GET {{baseUrl}}/projects?search=blockchain
+
+### Get project by ID
+# Replace {projectId} with actual project ID
+GET {{baseUrl}}/projects/{projectId}
+
+###############################################
+# 11. GitHub Integration (Mixed - Public & Protected)
 ###############################################
 
 ### Get GitHub profile by username (Public)
@@ -263,7 +283,7 @@ POST {{baseUrl}}/github/sync/{developerId}
 Authorization: Bearer {{accessToken}}
 
 ###############################################
-# 11. Reputation System (Mixed - Public & Protected)
+# 12. Reputation System (Mixed - Public & Protected)
 ###############################################
 
 ### Calculate my reputation (Protected - Developers only)
