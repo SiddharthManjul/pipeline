@@ -82,13 +82,16 @@ export class ReputationController {
     );
 
     if (!developer) {
-      throw new HttpException(
-        'Only developers have reputation scores',
-        HttpStatus.FORBIDDEN,
-      );
+      // Return null instead of throwing error for better frontend handling
+      return null;
     }
 
-    return this.reputationService.getReputation(developer.id);
+    try {
+      return await this.reputationService.getReputation(developer.id);
+    } catch (error) {
+      // If no reputation calculated yet, return null
+      return null;
+    }
   }
 
   /**
@@ -102,10 +105,8 @@ export class ReputationController {
     );
 
     if (!developer) {
-      throw new HttpException(
-        'Only developers have reputation history',
-        HttpStatus.FORBIDDEN,
-      );
+      // Return empty array instead of throwing error
+      return [];
     }
 
     return this.reputationService.getReputationHistory(developer.id);
