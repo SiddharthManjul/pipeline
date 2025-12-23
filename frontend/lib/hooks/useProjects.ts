@@ -4,8 +4,10 @@ import type { Project } from '@/types';
 
 export function useProjects(filters?: ProjectFilterParams) {
   return useQuery<Project[]>({
-    queryKey: ['projects', filters],
+    queryKey: ['projects', filters || {}],
     queryFn: () => projectsApi.getAll(filters),
+    retry: false,
+    initialData: [],
   });
 }
 

@@ -7,6 +7,9 @@ export function useMyReputationScore() {
   return useQuery<ReputationScore>({
     queryKey: ['reputation', 'me', 'score'],
     queryFn: () => reputationApi.getMyScore(),
+    retry: false,
+    // Don't show errors in console for missing endpoints
+    meta: { errorMessage: 'Reputation endpoint not available' },
   });
 }
 
