@@ -8,6 +8,7 @@ import { DbServicesModule } from './db_services/index.js';
 import { AuthModule } from './auth/auth.module.js';
 import { ProfileModule } from './profile/profile.module.js';
 import { DevelopersModule } from './developers/developers.module.js';
+import { ProjectsModule } from './projects/projects.module.js';
 import { GithubModule } from './github/github.module.js';
 import { ReputationModule } from './reputation/reputation.module.js';
 import { JwtAuthGuard } from './auth/guards/index.js';
@@ -22,6 +23,7 @@ import { JwtAuthGuard } from './auth/guards/index.js';
     AuthModule,
     ProfileModule,
     DevelopersModule,
+    ProjectsModule,
     GithubModule,
     ReputationModule,
   ],
