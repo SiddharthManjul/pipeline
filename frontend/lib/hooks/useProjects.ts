@@ -8,6 +8,7 @@ export function useProjects(filters?: ProjectFilterParams) {
     queryKey: ['projects', filters || {}],
     queryFn: () => projectsApi.getAll(filters),
     retry: false,
+    staleTime: 5 * 60 * 1000, // 5 minutes
     initialData: [],
   });
 }
