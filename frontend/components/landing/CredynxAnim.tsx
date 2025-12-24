@@ -26,19 +26,19 @@ export const CredynxAnim = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="w-full h-full flex items-center justify-center px-4">
+    <div ref={containerRef} className="w-full h-full flex items-center justify-center">
       <svg 
-        viewBox="0 0 800 150" 
-        className="w-full max-w-5xl h-auto text-primary"
+        viewBox="0 0 1200 400" 
+        className="w-full h-full text-primary"
         preserveAspectRatio="xMidYMid meet"
       >
         <defs>
           <style>
             {`
               .credynx-text {
-                font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-family: 'Oxanium', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
                 font-weight: 700;
-                font-size: 120px;
+                font-size: 360px;
                 letter-spacing: -0.02em;
               }
             `}

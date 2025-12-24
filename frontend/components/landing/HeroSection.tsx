@@ -31,12 +31,12 @@ export const HeroSection = () => {
             {/* Bottom Half - 50% Height */}
             <div className="h-[50%] w-full relative flex flex-col justify-end items-center">
                 {/* 
-                   "Credynx will cover 35% of the whole hero section and will be situated on the bottom part"
-                   35% of 100vh = 35vh.
-                   This container is 50vh.
-                   So we place the Credynx text in the bottom 35vh (70% of this container).
+                   User requested: "height to 45% of hero section window"
+                   45% of 100vh = 45vh.
+                   This container is 50vh (bottom half).
+                   So we need 45vh out of 50vh = 90% of this container.
                 */}
-                <div className="h-[70%] w-full flex items-end justify-center pb-8 z-10">
+                <div className="h-[90%] w-full flex items-center justify-center z-10">
                      <CredynxAnim />
                 </div>
             </div>
