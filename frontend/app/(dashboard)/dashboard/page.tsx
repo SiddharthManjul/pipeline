@@ -2,7 +2,7 @@
 
 import { useAuth, useMyProfile, useMyReputationScore } from '@/lib/hooks';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { FuturisticButton as Button } from '@/components/ui/futuristic-button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useRouter } from 'next/navigation';
 import { ReputationScore, TierBadge } from '@/components/features/reputation';

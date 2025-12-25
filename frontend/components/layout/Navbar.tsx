@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { LogOut, User, Menu } from 'lucide-react';
 import { useAuth } from '@/lib/hooks';
-import { Button } from '@/components/ui/button';
+import { FuturisticButton as Button } from '@/components/ui/futuristic-button';
 import {
   DropdownMenu,
   DropdownMenuContent,

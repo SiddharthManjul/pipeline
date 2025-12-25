@@ -9,7 +9,7 @@ import { Loader2 } from 'lucide-react';
 import { useAuth } from '@/lib/hooks';
 import { registerSchema, type RegisterFormData } from '@/lib/validations';
 import { UserRole } from '@/types';
-import { Button } from '@/components/ui/button';
+import { FuturisticButton as Button } from '@/components/ui/futuristic-button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {

@@ -4,7 +4,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/hooks';
-import { Button } from '@/components/ui/button';
+import { FuturisticButton as Button } from '@/components/ui/futuristic-button';
 import { ArrowRight, Code2, Users, TrendingUp, Github } from 'lucide-react';
 import Link from 'next/link';
 import { HeroSection } from '@/components/landing/HeroSection';

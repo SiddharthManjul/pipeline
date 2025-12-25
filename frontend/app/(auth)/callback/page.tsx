@@ -6,7 +6,7 @@ import { Loader2, CheckCircle2, XCircle } from 'lucide-react';
 import { useAuthStore } from '@/lib/store/authStore';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
+import { FuturisticButton as Button } from '@/components/ui/futuristic-button';
 import Link from 'next/link';
 
 function CallbackContent() {
