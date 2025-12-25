@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { FuturisticButton as Button } from '@/components/ui/futuristic-button';
 import { TierBadge } from '@/components/features/reputation';
 import { MapPin, Star, FolderGit2, ExternalLink } from 'lucide-react';
 import type { Developer } from '@/types';

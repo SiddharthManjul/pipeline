@@ -7,7 +7,7 @@ import { Loader2 } from 'lucide-react';
 import { developerProfileSchema, type DeveloperProfileFormData } from '@/lib/validations';
 import { useCreateDeveloperProfile } from '@/lib/hooks';
 import { Availability } from '@/types';
-import { Button } from '@/components/ui/button';
+import { FuturisticButton as Button } from '@/components/ui/futuristic-button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';

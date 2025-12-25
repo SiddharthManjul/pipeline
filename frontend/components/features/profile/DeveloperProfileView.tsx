@@ -12,7 +12,7 @@ import { ProjectCard } from './ProjectCard';
 import { ProjectFormDialog } from './ProjectFormDialog';
 import { ReputationScore, ReputationBreakdown, TierBadge } from '@/components/features/reputation';
 import { GitHubStatsCard } from '@/components/features/github';
-import { Button } from '@/components/ui/button';
+import { FuturisticButton as Button } from '@/components/ui/futuristic-button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';

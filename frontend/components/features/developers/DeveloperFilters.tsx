@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Button } from '@/components/ui/button';
+import { FuturisticButton as Button } from '@/components/ui/futuristic-button';
 import { Badge } from '@/components/ui/badge';
 import { X, Search } from 'lucide-react';
 import { DeveloperTier, Availability } from '@/types';

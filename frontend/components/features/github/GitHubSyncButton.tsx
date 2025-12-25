@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { FuturisticButton as Button } from '@/components/ui/futuristic-button';
 import { RefreshCw } from 'lucide-react';
 import { useSyncGitHub } from '@/lib/hooks';
 

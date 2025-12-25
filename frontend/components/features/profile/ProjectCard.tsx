@@ -5,7 +5,7 @@ import { ExternalLink, Github, Edit, Trash2, Users, Star, GitFork } from 'lucide
 import type { Project } from '@/types';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { FuturisticButton as Button } from '@/components/ui/futuristic-button';
 import {
   AlertDialog,
   AlertDialogAction,
