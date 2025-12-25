@@ -24,14 +24,16 @@ export class VouchesService {
     cursor?: Prisma.VouchWhereUniqueInput;
     where?: Prisma.VouchWhereInput;
     orderBy?: Prisma.VouchOrderByWithRelationInput;
-  }): Promise<Vouch[]> {
-    const { skip, take, cursor, where, orderBy } = params;
+    include?: Prisma.VouchInclude;
+  }): Promise<any[]> {
+    const { skip, take, cursor, where, orderBy, include } = params;
     return this.prisma.vouch.findMany({
       skip,
       take,
       cursor,
       where,
       orderBy,
+      include,
     });
   }
 
