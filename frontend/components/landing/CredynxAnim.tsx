@@ -28,7 +28,7 @@ export const CredynxAnim = () => {
   return (
     <div ref={containerRef} className="w-full h-full flex items-center justify-center">
       <svg 
-        viewBox="0 0 1200 400" 
+        viewBox="0 0 1100 350" 
         className="w-full h-full text-primary"
         preserveAspectRatio="xMidYMid meet"
       >
