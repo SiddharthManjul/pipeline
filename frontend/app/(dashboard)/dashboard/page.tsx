@@ -237,34 +237,157 @@ export default function DashboardPage() {
     );
   }
 
-  // Founder Dashboard (placeholder)
-  if (isFounder) {
+  // Founder Dashboard
+  if (isFounder && profile?.founder) {
     return (
       <div className="space-y-6">
+        {/* Header */}
         <div>
-          <h1 className="text-3xl font-bold">Founder Dashboard</h1>
+          <h1 className="text-3xl font-bold">Welcome back, {profile.founder.companyName}! 👋</h1>
           <p className="text-muted-foreground mt-2">
-            Manage your company profile and job postings
+            Here's your company dashboard overview
           </p>
         </div>
 
+        {/* Quick Actions */}
+        <div className="grid gap-6 lg:grid-cols-2">
+          <Card>
+            <CardHeader>
+              <CardTitle>Quick Actions</CardTitle>
+              <CardDescription>Manage your profile and discover developers</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <Button
+                className="w-full justify-start"
+                variant="outline"
+                onClick={() => router.push('/profile')}
+              >
+                <UserIcon className="mr-2 h-4 w-4" />
+                View Company Profile
+              </Button>
+              <Button
+                className="w-full justify-start"
+                variant="outline"
+                onClick={() => router.push('/developers')}
+              >
+                <Users className="mr-2 h-4 w-4" />
+                Browse Developer Directory
+              </Button>
+              <div className="pt-2 border-t">
+                <p className="text-xs text-muted-foreground mb-2">Coming Soon:</p>
+                <Button
+                  className="w-full justify-start"
+                  variant="outline"
+                  disabled
+                >
+                  <Plus className="mr-2 h-4 w-4" />
+                  Post a Job Opening
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Platform Features</CardTitle>
+              <CardDescription>Available tools for hiring</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-3 text-sm">
+                <li className="flex items-start gap-2">
+                  <span className="text-green-500 text-xl">✓</span>
+                  <div>
+                    <p className="font-medium">Browse Verified Developers</p>
+                    <p className="text-muted-foreground">Access tier-ranked developer profiles with reputation scores</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-green-500 text-xl">✓</span>
+                  <div>
+                    <p className="font-medium">View Developer Projects</p>
+                    <p className="text-muted-foreground">See live demos and GitHub repositories</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-yellow-500 text-xl">⏳</span>
+                  <div>
+                    <p className="font-medium">Post Job Openings</p>
+                    <p className="text-muted-foreground">Coming soon - AI-powered developer matching</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-yellow-500 text-xl">⏳</span>
+                  <div>
+                    <p className="font-medium">Schedule Sessions</p>
+                    <p className="text-muted-foreground">Coming soon - Direct developer meetings</p>
+                  </div>
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Company Info */}
         <Card>
           <CardHeader>
-            <CardTitle>Coming Soon</CardTitle>
-            <CardDescription>
-              Founder dashboard features are under development
-            </CardDescription>
+            <CardTitle>Company Information</CardTitle>
+            <CardDescription>Your profile summary</CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-muted-foreground mb-4">
-              The founder dashboard will include:
-            </p>
-            <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
-              <li>Post and manage job openings</li>
-              <li>Browse developer directory</li>
-              <li>View matched candidates</li>
-              <li>Schedule sessions with developers</li>
-              <li>Track hiring pipeline</li>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div>
+                <p className="text-sm text-muted-foreground">Company Name</p>
+                <p className="font-medium">{profile.founder.companyName}</p>
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Your Position</p>
+                <p className="font-medium">{profile.founder.position}</p>
+              </div>
+              {profile.founder.companyWebsite && (
+                <div>
+                  <p className="text-sm text-muted-foreground">Website</p>
+                  <a
+                    href={profile.founder.companyWebsite}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-primary hover:underline"
+                  >
+                    {profile.founder.companyWebsite}
+                  </a>
+                </div>
+              )}
+              <div>
+                <p className="text-sm text-muted-foreground">Member Since</p>
+                <p className="font-medium">{new Date(profile.founder.createdAt).toLocaleDateString()}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Getting Started Tips */}
+        <Card className="border-blue-500/50 bg-blue-500/5">
+          <CardHeader>
+            <CardTitle>💡 Getting Started</CardTitle>
+            <CardDescription>Make the most of the platform</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul className="space-y-2 text-sm">
+              <li className="flex items-start gap-2">
+                <span className="text-blue-500">•</span>
+                <span>Browse the developer directory to discover talented Web3 developers</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-blue-500">•</span>
+                <span>Check developer reputation scores and tier rankings for quality assurance</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-blue-500">•</span>
+                <span>Review developer projects to see their work in action</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-blue-500">•</span>
+                <span>Complete your company profile to increase credibility</span>
+              </li>
             </ul>
           </CardContent>
         </Card>

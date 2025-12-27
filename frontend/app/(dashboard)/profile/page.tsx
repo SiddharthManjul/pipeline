@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import { useAuth } from '@/lib/hooks';
@@ -5,6 +6,8 @@ import { useMyProfile } from '@/lib/hooks/useProfile';
 import { Loader2 } from 'lucide-react';
 import { DeveloperProfileForm } from '@/components/features/profile/DeveloperProfileForm';
 import { DeveloperProfileView } from '@/components/features/profile/DeveloperProfileView';
+import { FounderProfileForm } from '@/components/features/profile/FounderProfileForm';
+import { FounderProfileView } from '@/components/features/profile/FounderProfileView';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function ProfilePage() {
@@ -13,7 +16,7 @@ export default function ProfilePage() {
 
   if (isLoading) {
     return (
-      <div className="container mx-auto p-6 flex items-center justify-center min-h-[400px]">
+      <div className="container mx-auto p-6 flex items-center justify-center min-h-100">
         <div className="flex flex-col items-center space-y-4">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
           <p className="text-muted-foreground">Loading profile...</p>
@@ -57,14 +60,7 @@ export default function ProfilePage() {
           </div>
 
           {isDeveloper && <DeveloperProfileForm />}
-          {isFounder && (
-            <Card>
-              <CardHeader>
-                <CardTitle>Founder Profile</CardTitle>
-                <CardDescription>Coming soon...</CardDescription>
-              </CardHeader>
-            </Card>
-          )}
+          {isFounder && <FounderProfileForm />}
         </div>
       ) : (
         // Show profile view
@@ -72,13 +68,8 @@ export default function ProfilePage() {
           {isDeveloper && profile?.developer && (
             <DeveloperProfileView developer={profile.developer} />
           )}
-          {isFounder && (
-            <Card>
-              <CardHeader>
-                <CardTitle>Founder Profile View</CardTitle>
-                <CardDescription>Coming soon...</CardDescription>
-              </CardHeader>
-            </Card>
+          {isFounder && profile?.founder && (
+            <FounderProfileView founder={profile.founder} />
           )}
         </div>
       )}
