@@ -55,6 +55,22 @@ export interface UpdateDeveloperProfileDto {
   availability?: Availability;
 }
 
+export interface CreateFounderProfileDto {
+  companyName: string;
+  position: string;
+  companyWebsite?: string;
+  bio?: string;
+  linkedinUrl?: string;
+}
+
+export interface UpdateFounderProfileDto {
+  companyName?: string;
+  position?: string;
+  companyWebsite?: string;
+  bio?: string;
+  linkedinUrl?: string;
+}
+
 export interface DeveloperFilterParams {
   tier?: DeveloperTier;
   availability?: Availability;
