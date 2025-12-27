@@ -3,6 +3,8 @@ import { profileApi } from '@/lib/api';
 import type {
   CreateDeveloperProfileDto,
   UpdateDeveloperProfileDto,
+  CreateFounderProfileDto,
+  UpdateFounderProfileDto,
   CreateProjectDto,
   UpdateProjectDto,
 } from '@/types';
@@ -32,6 +34,23 @@ export function useCreateDeveloperProfile() {
   return useMutation({
     mutationFn: (data: CreateDeveloperProfileDto) =>
       profileApi.createDeveloperProfile(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['profile', 'me'] });
+      toast.success('Profile created successfully!');
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || 'Failed to create profile');
+    },
+  });
+}
+
+// Create founder profile
+export function useCreateFounderProfile() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (data: CreateFounderProfileDto) =>
+      profileApi.createFounderProfile(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['profile', 'me'] });
       toast.success('Profile created successfully!');

@@ -27,5 +27,23 @@ export const updateDeveloperProfileSchema = developerProfileSchema.partial().omi
   github: true,
 });
 
+export const founderProfileSchema = z.object({
+  companyName: z
+    .string()
+    .min(2, 'Company name must be at least 2 characters')
+    .max(100, 'Company name must be at most 100 characters'),
+  position: z
+    .string()
+    .min(2, 'Position must be at least 2 characters')
+    .max(100, 'Position must be at most 100 characters'),
+  companyWebsite: z.string().url('Must be a valid URL').optional().or(z.literal('')),
+  bio: z.string().max(500, 'Bio must be at most 500 characters').optional().or(z.literal('')),
+  linkedinUrl: z.string().url('Must be a valid URL').optional().or(z.literal('')),
+});
+
+export const updateFounderProfileSchema = founderProfileSchema.partial();
+
 export type DeveloperProfileFormData = z.infer<typeof developerProfileSchema>;
 export type UpdateDeveloperProfileFormData = z.infer<typeof updateDeveloperProfileSchema>;
+export type FounderProfileFormData = z.infer<typeof founderProfileSchema>;
+export type UpdateFounderProfileFormData = z.infer<typeof updateFounderProfileSchema>;

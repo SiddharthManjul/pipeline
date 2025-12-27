@@ -4,6 +4,8 @@ import type {
   Founder,
   CreateDeveloperProfileDto,
   UpdateDeveloperProfileDto,
+  CreateFounderProfileDto,
+  UpdateFounderProfileDto,
   CreateProjectDto,
   UpdateProjectDto,
   Project,
@@ -31,14 +33,14 @@ export const profileApi = {
   },
 
   // Create founder profile
-  createFounderProfile: async (profileData: Partial<Founder>): Promise<Founder> => {
+  createFounderProfile: async (profileData: CreateFounderProfileDto): Promise<Founder> => {
     const { data } = await apiClient.post<Founder>('/profile/me', profileData);
     return data;
   },
 
-  // Update profile
+  // Update profile (works for both developer and founder)
   updateProfile: async (
-    profileData: UpdateDeveloperProfileDto
+    profileData: UpdateDeveloperProfileDto | UpdateFounderProfileDto
   ): Promise<Developer | Founder> => {
     const { data } = await apiClient.patch('/profile/me', profileData);
     return data;
