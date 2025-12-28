@@ -18,8 +18,6 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useState } from 'react';
 
 const navigationItems = [
-  { name: 'Dashboard', href: '/dashboard' },
-  { name: 'Profile', href: '/profile' },
   { name: 'Developers', href: '/developers' },
   { name: 'Projects', href: '/projects' },
 ];
@@ -91,9 +89,9 @@ export function Navbar() {
                 <DropdownMenuContent align="end" className="w-56">
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => router.push('/profile')}>
+                  <DropdownMenuItem onClick={() => router.push('/dashboard')}>
                     <User className="mr-2 h-4 w-4" />
-                    Profile
+                    My Profile
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleLogout} className="text-destructive">
