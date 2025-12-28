@@ -12,18 +12,13 @@ export interface ProjectFilterParams {
 export const projectsApi = {
   // Get all projects with filters
   getAll: async (params?: ProjectFilterParams): Promise<Project[]> => {
-    try {
-      const { data } = await apiClient.get<{
-        projects: Project[];
-        total: number;
-        limit: number;
-        skip: number;
-      }>('/projects', { params });
-      return data?.projects || [];
-    } catch (error) {
-      console.error('Error fetching projects:', error);
-      return [];
-    }
+    const { data } = await apiClient.get<{
+      projects: Project[];
+      total: number;
+      limit: number;
+      skip: number;
+    }>('/projects', { params });
+    return data?.projects || [];
   },
 
   // Get project by ID
