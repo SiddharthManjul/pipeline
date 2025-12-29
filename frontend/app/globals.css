@@ -179,7 +179,48 @@
 }
 
 body {
-  background: var(--background);
+  background-color: #0a0a0a !important;
+  background-image: linear-gradient(to right, rgba(249, 115, 22, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(249, 115, 22, 0.15) 1px, transparent 1px) !important;
+  background-size: 50px 50px !important;
+  background-attachment: fixed !important;
   color: var(--foreground);
   font-family: var(--font-sans);
+}
+
+/* Make all direct children of body and main wrappers transparent */
+body > * {
+  background-color: transparent !important;
+}
+
+/* Override component backgrounds to be transparent or dark with grid */
+.bg-background {
+  background-color: transparent !important;
+}
+
+main, [role="main"] {
+  background-color: transparent !important;
+}
+
+@layer utilities {
+  @keyframes spotlight {
+    0% {
+      opacity: 0;
+      transform: translate(-72%, -62%) scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -40%) scale(1);
+    }
+  }
+
+  .animate-spotlight {
+    animation: spotlight 2s ease 0.25s 1 forwards;
+  }
+
+  .bg-grid-white\/\[0\.02\] {
+    background-image: linear-gradient(to right, rgba(249, 115, 22, 0.15) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(249, 115, 22, 0.15) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
 }

@@ -27,8 +27,8 @@ export const CredynxAnim = () => {
 
   return (
     <div ref={containerRef} className="w-full h-full flex items-center justify-center">
-      <svg 
-        viewBox="0 0 1100 350" 
+      <svg
+        viewBox="0 0 1100 350"
         className="w-full h-full text-primary"
         preserveAspectRatio="xMidYMid meet"
       >
@@ -44,15 +44,15 @@ export const CredynxAnim = () => {
             `}
           </style>
         </defs>
-        <text 
-          x="50%" 
-          y="50%" 
-          textAnchor="middle" 
+        <text
+          x="50%"
+          y="50%"
+          textAnchor="middle"
           dominantBaseline="middle"
           className="line credynx-text"
-          stroke="currentColor" 
-          fill="none" 
-          strokeWidth="2"
+          stroke="currentColor"
+          fill="none"
+          strokeWidth="3.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         >
