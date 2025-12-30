@@ -94,7 +94,7 @@ export function AuthModal({ isOpen, onClose, defaultTab = 'login' }: AuthModalPr
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-125 bg-black/95 backdrop-blur-xl border-primary/20">
+      <DialogContent className="sm:max-w-125 bg-transparent border-none shadow-none">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-center bg-linear-to-r from-primary to-orange-600 bg-clip-text text-transparent">
             Welcome to Credynx
