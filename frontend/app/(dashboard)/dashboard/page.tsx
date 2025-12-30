@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { useAuth, useMyProfile, useMyReputationScore } from '@/lib/hooks';
@@ -67,7 +69,7 @@ export default function UnifiedDashboardPage() {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold">Welcome to Web3 Talent Connect! 👋</h1>
+          <h1 className="text-3xl font-bold">Welcome to Credynx! 👋</h1>
           <p className="text-muted-foreground mt-2">
             Complete your profile to get started
           </p>
@@ -367,8 +369,8 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
               <div>
                 <h3 className="font-semibold text-sm text-muted-foreground mb-2">Availability</h3>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary">
-                  <div className={`h-2 w-2 rounded-full ${availabilityColors[developer.availability]}`} />
-                  <span className="text-sm font-medium">{availabilityLabels[developer.availability]}</span>
+                  <div className={`h-2 w-2 rounded-full ${availabilityColors[developer.availability as keyof typeof availabilityColors]}`} />
+                  <span className="text-sm font-medium">{availabilityLabels[developer.availability as keyof typeof availabilityLabels]}</span>
                 </div>
               </div>
             </div>

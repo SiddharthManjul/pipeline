@@ -50,9 +50,9 @@ export function Navbar() {
           <div className="flex items-center gap-8">
             <Link href="/dashboard" className="flex items-center gap-2">
               <div className="h-8 w-8 rounded bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">W3</span>
+                <span className="text-primary-foreground font-bold text-lg">CX</span>
               </div>
-              <span className="font-bold text-xl hidden sm:inline">Web3 Talent</span>
+              <span className="font-bold text-xl hidden sm:inline">Credynx</span>
             </Link>
 
             {/* Desktop Navigation */}
