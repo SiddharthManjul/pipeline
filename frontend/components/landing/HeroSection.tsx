@@ -1,11 +1,20 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { CredynxAnim } from './CredynxAnim';
 import { FuturisticButton } from '@/components/ui/futuristic-button';
-import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import { AuthModal } from '@/components/auth/AuthModal';
+
 export const HeroSection = () => {
+    const [authModalOpen, setAuthModalOpen] = useState(false);
+    const [authTab, setAuthTab] = useState<'login' | 'signup'>('login');
+
+    const openAuthModal = (tab: 'login' | 'signup') => {
+        setAuthTab(tab);
+        setAuthModalOpen(true);
+    };
+
     return (
         <div className="relative h-screen w-full overflow-hidden">
             {/* Content Layer */}
@@ -32,22 +41,37 @@ export const HeroSection = () => {
                          <CredynxAnim />
                     </div>
                 </div>
-                
+
                 {/* CTA Buttons - Centered */}
                 <div className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col sm:flex-row gap-4 w-full justify-center px-4">
-                     <Link href="/register">
-                      <FuturisticButton size="lg" variant="outline" className="w-full sm:w-auto backdrop-blur-sm bg-background/50" borderColor='rgba(255, 0, 0, 1)'>
+                    <FuturisticButton
+                        size="lg"
+                        variant="outline"
+                        className="w-full sm:w-auto backdrop-blur-sm bg-background/50"
+                        borderColor='rgba(255, 0, 0, 1)'
+                        onClick={() => openAuthModal('signup')}
+                    >
                         Get Started
                         <ArrowRight className="ml-2 h-4 w-4" />
-                      </FuturisticButton>
-                    </Link>
-                    <Link href="/login">
-                      <FuturisticButton size="lg" variant="outline" className="w-full sm:w-auto backdrop-blur-sm bg-background/50" borderColor='rgba(255, 0, 0, 1)'>
+                    </FuturisticButton>
+                    <FuturisticButton
+                        size="lg"
+                        variant="outline"
+                        className="w-full sm:w-auto backdrop-blur-sm bg-background/50"
+                        borderColor='rgba(255, 0, 0, 1)'
+                        onClick={() => openAuthModal('login')}
+                    >
                         Sign In
-                      </FuturisticButton>
-                    </Link>
+                    </FuturisticButton>
                 </div>
             </div>
+
+            {/* Auth Modal */}
+            <AuthModal
+                isOpen={authModalOpen}
+                onClose={() => setAuthModalOpen(false)}
+                defaultTab={authTab}
+            />
         </div>
     );
 };
