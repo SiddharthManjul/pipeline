@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { useState } from 'react';
@@ -12,6 +13,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { authApi } from '@/lib/api/auth';
+import { UserRole } from '@/types';
 import Link from 'next/link';
 
 const loginSchema = z.object({
@@ -62,7 +64,7 @@ export function AuthModal({ isOpen, onClose, defaultTab = 'login' }: AuthModalPr
     try {
       setIsLoading(true);
       setError('');
-      await authApi.login(data.email, data.password);
+      await authApi.login(data);
       router.push('/dashboard');
       onClose();
     } catch (err: any) {
@@ -79,7 +81,7 @@ export function AuthModal({ isOpen, onClose, defaultTab = 'login' }: AuthModalPr
       await authApi.register({
         email: data.email,
         password: data.password,
-        role: selectedRole,
+        role: selectedRole === 'DEVELOPER' ? UserRole.DEVELOPER : UserRole.FOUNDER,
       });
       router.push('/dashboard');
       onClose();
@@ -92,10 +94,10 @@ export function AuthModal({ isOpen, onClose, defaultTab = 'login' }: AuthModalPr
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[500px] bg-black/95 backdrop-blur-xl border-primary/20">
+      <DialogContent className="sm:max-w-125 bg-black/95 backdrop-blur-xl border-primary/20">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-center bg-gradient-to-r from-primary to-orange-600 bg-clip-text text-transparent">
-            Welcome to Web3 Talent
+          <DialogTitle className="text-2xl font-bold text-center bg-linear-to-r from-primary to-orange-600 bg-clip-text text-transparent">
+            Welcome to Credynx
           </DialogTitle>
         </DialogHeader>
 
