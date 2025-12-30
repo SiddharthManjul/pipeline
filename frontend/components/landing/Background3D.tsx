@@ -89,11 +89,11 @@ export const Background3D = () => {
     }, []);
 
     return (
-        <div 
-            ref={mountRef} 
-            className="absolute inset-0 pointer-events-none -z-10 overflow-hidden" 
-            style={{ 
-                opacity: 0.4 // subtle 
+        <div
+            ref={mountRef}
+            className="fixed inset-0 pointer-events-none -z-10 overflow-hidden"
+            style={{
+                opacity: 0.4 // subtle
             }}
         />
     );
