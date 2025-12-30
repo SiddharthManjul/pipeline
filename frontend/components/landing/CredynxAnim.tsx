@@ -50,7 +50,7 @@ export const CredynxAnim = () => {
           textAnchor="middle"
           dominantBaseline="middle"
           className="line credynx-text"
-          stroke="currentColor"
+          stroke="#F97316"
           fill="none"
           strokeWidth="3.5"
           strokeLinecap="round"

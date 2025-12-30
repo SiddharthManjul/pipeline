@@ -29,7 +29,7 @@ export const HeroSection = () => {
                     {/* Subheading Area - Bottom 10% of Top 50% */}
                     <div className="h-[20%] flex flex-col items-center justify-end pb-4 px-4 text-center">
                         <h2 className="text-4xl md:text-5xl text-muted-foreground font-medium tracking-wide uppercase">
-                            The Underground Circuit of <span className="text-primary">Web3</span>
+                            The Underground Circuit of <span className="text-[#F97316]">Web3</span>
                         </h2>
                     </div>
                 </div>
