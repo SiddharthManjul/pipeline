@@ -102,9 +102,19 @@ export function AuthModal({ isOpen, onClose, defaultTab = 'login' }: AuthModalPr
         </DialogHeader>
 
         <Tabs value={activeTab} onValueChange={(val) => setActiveTab(val as 'login' | 'signup')} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 mb-6">
-            <TabsTrigger value="login">Sign In</TabsTrigger>
-            <TabsTrigger value="signup">Sign Up</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2 mb-6 bg-black/40 border border-primary/20 p-1">
+            <TabsTrigger
+              value="login"
+              className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-medium transition-all"
+            >
+              Sign In
+            </TabsTrigger>
+            <TabsTrigger
+              value="signup"
+              className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-medium transition-all"
+            >
+              Sign Up
+            </TabsTrigger>
           </TabsList>
 
           {/* Login Tab */}
@@ -152,9 +162,11 @@ export function AuthModal({ isOpen, onClose, defaultTab = 'login' }: AuthModalPr
 
               <Button
                 type="submit"
-                className="w-full"
+                size="lg"
+                variant="outline"
+                className="w-full backdrop-blur-sm bg-background/50"
                 disabled={isLoading}
-                borderColor="rgba(249, 115, 22, 1)"
+                borderColor="rgba(255, 0, 0, 1)"
               >
                 {isLoading ? 'Signing in...' : 'Sign In'}
               </Button>
@@ -170,7 +182,7 @@ export function AuthModal({ isOpen, onClose, defaultTab = 'login' }: AuthModalPr
             </div>
 
             <Link href="/api/auth/github" className="block">
-              <Button variant="outline" className="w-full" borderColor="rgba(249, 115, 22, 0.3)">
+              <Button size="lg" variant="outline" className="w-full backdrop-blur-sm bg-background/50" borderColor="rgba(255, 0, 0, 1)">
                 <Github className="mr-2 h-4 w-4" />
                 GitHub
               </Button>
@@ -252,9 +264,11 @@ export function AuthModal({ isOpen, onClose, defaultTab = 'login' }: AuthModalPr
 
               <Button
                 type="submit"
-                className="w-full"
+                size="lg"
+                variant="outline"
+                className="w-full backdrop-blur-sm bg-background/50"
                 disabled={isLoading}
-                borderColor="rgba(249, 115, 22, 1)"
+                borderColor="rgba(255, 0, 0, 1)"
               >
                 {isLoading ? 'Creating account...' : 'Create Account'}
               </Button>
@@ -270,7 +284,7 @@ export function AuthModal({ isOpen, onClose, defaultTab = 'login' }: AuthModalPr
             </div>
 
             <Link href="/api/auth/github" className="block">
-              <Button variant="outline" className="w-full" borderColor="rgba(249, 115, 22, 0.3)">
+              <Button size="lg" variant="outline" className="w-full backdrop-blur-sm bg-background/50" borderColor="rgba(255, 0, 0, 1)">
                 <Github className="mr-2 h-4 w-4" />
                 GitHub
               </Button>

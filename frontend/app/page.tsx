@@ -70,7 +70,7 @@ export default function HomePage() {
           <div className="pt-24 text-center">
             <p className="text-sm text-muted-foreground mb-4">Or continue with</p>
             <Link href="/api/auth/github">
-              <Button variant="outline" size="lg" className="backdrop-blur-sm bg-background/50">
+              <Button variant="outline" size="lg" className="backdrop-blur-sm bg-background/50" borderColor="rgba(255, 0, 0, 1)">
                 <Github className="mr-2 h-5 w-5" />
                 GitHub
               </Button>

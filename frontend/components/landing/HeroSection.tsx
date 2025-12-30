@@ -54,7 +54,7 @@ export const HeroSection = () => {
                         Get Started
                         <ArrowRight className="ml-2 h-4 w-4" />
                     </FuturisticButton>
-                    <FuturisticButton
+                    {/* <FuturisticButton
                         size="lg"
                         variant="outline"
                         className="w-full sm:w-auto backdrop-blur-sm bg-background/50"
@@ -62,7 +62,7 @@ export const HeroSection = () => {
                         onClick={() => openAuthModal('login')}
                     >
                         Sign In
-                    </FuturisticButton>
+                    </FuturisticButton> */}
                 </div>
             </div>
 
