@@ -10,11 +10,16 @@ import Link from "next/link";
 import { HeroSection } from "@/components/landing/HeroSection";
 import { Background3D } from "@/components/landing/Background3D";
 import { BentoGrid } from "@/components/landing/BentoGrid";
+import { Navbar } from "@/components/layout/Navbar";
+import { AuthModal } from "@/components/auth/AuthModal";
 
 export default function HomePage() {
   const router = useRouter();
   const { isAuthenticated } = useAuth();
   const [mountKey, setMountKey] = useState(0);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authTab, setAuthTab] = useState<'login' | 'signup'>('login');
+  const [authWarning, setAuthWarning] = useState<string>('');
 
   // Force remount Background3D when component mounts
   useEffect(() => {
@@ -33,9 +38,17 @@ export default function HomePage() {
     return null;
   }
 
+  const handleAuthModalOpen = (tab: 'login' | 'signup', message?: string) => {
+    setAuthTab(tab);
+    setAuthWarning(message || '');
+    setAuthModalOpen(true);
+  };
+
   return (
     <div className="min-h-screen bg-background relative selection:bg-primary/20">
       <Background3D key={mountKey} />
+
+      <Navbar onAuthModalOpen={handleAuthModalOpen} />
 
       <HeroSection />
 
@@ -61,6 +74,16 @@ export default function HomePage() {
             </Button>
           </Link>
         </div>
+
+      <AuthModal
+        isOpen={authModalOpen}
+        onClose={() => {
+          setAuthModalOpen(false);
+          setAuthWarning('');
+        }}
+        defaultTab={authTab}
+        warningMessage={authWarning}
+      />
       </div>
     );
 }
