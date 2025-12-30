@@ -34,9 +34,10 @@ interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
   defaultTab?: 'login' | 'signup';
+  warningMessage?: string;
 }
 
-export function AuthModal({ isOpen, onClose, defaultTab = 'login' }: AuthModalProps) {
+export function AuthModal({ isOpen, onClose, defaultTab = 'login', warningMessage }: AuthModalProps) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState(defaultTab);
   const [selectedRole, setSelectedRole] = useState<'DEVELOPER' | 'FOUNDER'>('DEVELOPER');
@@ -100,6 +101,12 @@ export function AuthModal({ isOpen, onClose, defaultTab = 'login' }: AuthModalPr
             Welcome to Credynx
           </DialogTitle>
         </DialogHeader>
+
+        {warningMessage && (
+          <div className="mb-4 p-3 rounded-md bg-orange-500/10 border border-orange-500/30">
+            <p className="text-sm text-orange-500">{warningMessage}</p>
+          </div>
+        )}
 
         <Tabs value={activeTab} onValueChange={(val) => setActiveTab(val as 'login' | 'signup')} className="w-full">
           <TabsList className="grid w-full grid-cols-2 mb-6 bg-black/40 border border-primary/20 p-1">
