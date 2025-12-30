@@ -22,10 +22,14 @@ const navigationItems = [
   { name: 'Projects', href: '/projects' },
 ];
 
-export function Navbar() {
+interface NavbarProps {
+  onAuthModalOpen?: (tab: 'login' | 'signup', message?: string) => void;
+}
+
+export function Navbar({ onAuthModalOpen }: NavbarProps = {}) {
   const pathname = usePathname();
   const router = useRouter();
-  const { user, logout } = useAuth();
+  const { user, logout, isAuthenticated } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleLogout = async () => {
@@ -42,28 +46,35 @@ export function Navbar() {
     return name.substring(0, 2).toUpperCase();
   };
 
+  const handleNavClick = (e: React.MouseEvent, href: string) => {
+    if (!isAuthenticated) {
+      e.preventDefault();
+      onAuthModalOpen?.('login', 'Please login or sign up to access this page');
+    }
+  };
+
   return (
     <nav className="border-b bg-background">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-8">
-            <Link href="/dashboard" className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">CX</span>
-              </div>
-              <span className="font-bold text-xl hidden sm:inline">Credynx</span>
-            </Link>
+          <Link href="/dashboard" className="flex items-center gap-2">
+            <span className="font-bold text-2xl hidden sm:inline">CREDYNX</span>
+          </Link>
 
+          {/* Right Side - Navigation + User Menu */}
+          <div className="flex items-center gap-4">
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-1">
+            <div className="hidden md:flex items-center gap-4">
               {navigationItems.map((item) => {
                 const isActive = pathname === item.href;
                 return (
-                  <Link key={item.href} href={item.href}>
+                  <Link key={item.href} href={item.href} onClick={(e) => handleNavClick(e, item.href)}>
                     <Button
-                      variant={isActive ? 'secondary' : 'ghost'}
-                      className={isActive ? 'bg-secondary' : ''}
+                      size="lg"
+                      variant="outline"
+                      className="backdrop-blur-sm bg-background/50"
+                      borderColor="rgba(255, 0, 0, 1)"
                     >
                       {item.name}
                     </Button>
@@ -71,13 +82,11 @@ export function Navbar() {
                 );
               })}
             </div>
-          </div>
-
-          {/* Right Side - User Menu */}
-          <div className="flex items-center gap-4">
-            {/* Desktop User Menu */}
-            <div className="hidden md:block">
-              <DropdownMenu>
+            {isAuthenticated && (
+              <>
+                {/* Desktop User Menu */}
+                <div className="hidden md:block">
+                  <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="flex items-center gap-2">
                     <Avatar className="h-8 w-8">
@@ -128,10 +137,15 @@ export function Navbar() {
                       {navigationItems.map((item) => {
                         const isActive = pathname === item.href;
                         return (
-                          <Link key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)}>
+                          <Link key={item.href} href={item.href} onClick={(e) => {
+                            handleNavClick(e, item.href);
+                            setMobileMenuOpen(false);
+                          }}>
                             <Button
-                              variant={isActive ? 'secondary' : 'ghost'}
-                              className={`w-full justify-start ${isActive ? 'bg-secondary' : ''}`}
+                              size="lg"
+                              variant="outline"
+                              className="w-full backdrop-blur-sm bg-background/50"
+                              borderColor="rgba(255, 0, 0, 1)"
                             >
                               {item.name}
                             </Button>
@@ -158,6 +172,8 @@ export function Navbar() {
                 </SheetContent>
               </Sheet>
             </div>
+              </>
+            )}
           </div>
         </div>
       </div>
