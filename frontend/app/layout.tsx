@@ -22,7 +22,7 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: "Web3 Talent Connect - Developer & Founder Platform",
+  title: "Credynx - Developer & Founder Platform",
   description: "A reputation-based platform connecting Web3 developers with founders",
 };
 
