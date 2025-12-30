@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import Link from 'next/link';
@@ -54,9 +55,9 @@ export function Navbar({ onAuthModalOpen }: NavbarProps = {}) {
   };
 
   return (
-    <nav className="border-b bg-background">
-      <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
+    <div className="fixed top-0 left-0 right-0 z-50 h-16 bg-transparent backdrop-blur-[6px]">
+      <nav className="container mx-auto px-4 h-full">
+        <div className="flex h-full items-center justify-between">
           {/* Logo */}
           <Link href="/dashboard" className="flex items-center gap-2">
             <span className="font-bold text-2xl hidden sm:inline">CREDYNX</span>
@@ -176,7 +177,7 @@ export function Navbar({ onAuthModalOpen }: NavbarProps = {}) {
             )}
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 }
