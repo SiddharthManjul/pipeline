@@ -27,8 +27,8 @@ export const HeroSection = () => {
                     </div>
 
                     {/* Subheading Area - Bottom 10% of Top 50% */}
-                    <div className="h-[20%] flex flex-col items-center justify-end pb-4 px-4 text-center">
-                        <h2 className="text-4xl md:text-5xl text-muted-foreground font-medium tracking-wide uppercase">
+                    <div className="h-[20%] flex flex-col items-center justify-end pb-20 px-4 text-center">
+                        <h2 className="text-4xl md:text-6xl text-muted-foreground font-medium tracking-wide uppercase">
                             The Underground Circuit of <span className="text-[#F97316]">Web3</span>
                         </h2>
                     </div>
@@ -43,7 +43,7 @@ export const HeroSection = () => {
                 </div>
 
                 {/* CTA Buttons - Centered */}
-                <div className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col sm:flex-row gap-4 w-full justify-center px-4">
+                <div className="absolute top-[42%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col sm:flex-row gap-4 w-full justify-center px-4">
                     <FuturisticButton
                         size="lg"
                         variant="outline"

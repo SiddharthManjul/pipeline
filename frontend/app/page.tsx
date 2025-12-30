@@ -39,10 +39,15 @@ export default function HomePage() {
 
       <HeroSection />
 
-      <BentoGrid />
+      <div className="mt-24">
+        <h3 className="text-4xl md:text-5xl font-bold text-center mb-12 text-muted-foreground">
+          Why It <span style={{ color: '#F97316' }}>Matters</span>
+        </h3>
+        <BentoGrid />
+      </div>
 
       {/* GitHub Login */}
-        <div className="pt-24 text-center">
+        <div className="py-24 text-center">
           <p className="text-sm text-muted-foreground mb-4">Or continue with</p>
           <Link href="/api/auth/github">
             <Button
