@@ -3,7 +3,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, ArrowRightCircle } from 'lucide-react';
+import { ArrowBigDownDash, ArrowBigRightIcon, ArrowRight, ArrowRightCircle, ArrowRightCircleIcon } from 'lucide-react';
 import { FuturisticButton as Button } from '@/components/ui/futuristic-button';
 
 interface Section {
@@ -125,25 +125,28 @@ export const ScrollSections = () => {
             </motion.div>
 
             {/* Navigation Links - Bottom of sticky side */}
-            <div className="space-y-2 mt-100">
+            <div className="space-y-2 mt-102">
               {sections.map((section, index) => (
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(index)}
                   className={`w-full p-3 transition-all duration-300 text-left flex items-center justify-between group ${
                     activeSection === index
-                      ? 'text-primary'
+                      ? 'text-[#F97316]'
                       : 'text-muted-foreground hover:text-primary'
                   }`}
                 >
-                  <h3 className="text-2xl font-bold">{section.headline}</h3>
+                  <h3 className="text-2xl font-bold flex items-center gap-3">
+                    <span>{index + 1}.</span>
+                    <span>{section.headline}</span>
+                  </h3>
                   <div className="flex items-center flex-1 mx-4">
                     <div className={`h-0.5 w-full transition-all duration-300 ${
                       activeSection === index
-                        ? 'bg-primary'
+                        ? 'bg-[#F97316]'
                         : 'bg-muted-foreground group-hover:bg-primary'
                     }`} />
-                    <ArrowRightCircle className="h-6 w-6 -ml-2 shrink-0" />
+                    <ArrowRightCircleIcon className="h-6 w-6 -ml-2 shrink-0" />
                   </div>
                 </button>
               ))}
