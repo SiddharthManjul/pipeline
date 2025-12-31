@@ -102,9 +102,9 @@ export const useAuthStore = create<AuthState>()(
       logout: () => {
         get().clearAuth();
 
-        // Redirect to login
+        // Redirect to homepage
         if (typeof window !== 'undefined') {
-          window.location.href = '/login';
+          window.location.href = '/';
         }
       },
 
