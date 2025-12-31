@@ -84,7 +84,13 @@ export default function UnifiedDashboardPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button size="lg" onClick={() => router.push('/profile')}>
+            <Button
+              size="lg"
+              variant="outline"
+              className="backdrop-blur-sm bg-background/50"
+              borderColor="rgba(255, 0, 0, 1)"
+              onClick={() => router.push('/profile')}
+            >
               <UserIcon className="mr-2 h-4 w-4" />
               Create Profile Now
             </Button>
@@ -174,7 +180,12 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
                 <CardTitle>Edit Profile</CardTitle>
                 <CardDescription>Update your profile information</CardDescription>
               </div>
-              <Button variant="outline" onClick={() => setIsEditing(false)}>
+              <Button
+                variant="outline"
+                className="backdrop-blur-sm bg-background/50"
+                borderColor="rgba(255, 0, 0, 1)"
+                onClick={() => setIsEditing(false)}
+              >
                 Cancel
               </Button>
             </div>
@@ -247,7 +258,13 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
               </div>
 
               <div className="flex gap-4">
-                <Button type="submit" disabled={updateProfile.isPending}>
+                <Button
+                  type="submit"
+                  variant="outline"
+                  className="backdrop-blur-sm bg-background/50"
+                  borderColor="rgba(255, 0, 0, 1)"
+                  disabled={updateProfile.isPending}
+                >
                   {updateProfile.isPending ? 'Saving...' : 'Save Changes'}
                 </Button>
               </div>
@@ -269,7 +286,12 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
           </div>
           <p className="text-muted-foreground">@{developer.username}</p>
         </div>
-        <Button variant="outline" onClick={() => setIsEditing(true)}>
+        <Button
+          variant="outline"
+          className="backdrop-blur-sm bg-background/50"
+          borderColor="rgba(255, 0, 0, 1)"
+          onClick={() => setIsEditing(true)}
+        >
           <Edit className="mr-2 h-4 w-4" />
           Edit Profile
         </Button>
@@ -428,8 +450,9 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
           </CardHeader>
           <CardContent className="space-y-3">
             <Button
-              className="w-full justify-start"
+              className="w-full justify-start backdrop-blur-sm bg-background/50"
               variant="outline"
+              borderColor="rgba(255, 0, 0, 1)"
               onClick={() => setProjectDialogOpen(true)}
             >
               <Plus className="mr-2 h-4 w-4" />
@@ -439,8 +462,9 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
               <GitHubSyncButton variant="outline" size="default" showText />
             </div>
             <Button
-              className="w-full justify-start"
+              className="w-full justify-start backdrop-blur-sm bg-background/50"
               variant="outline"
+              borderColor="rgba(255, 0, 0, 1)"
               onClick={() => router.push('/developers')}
             >
               <Users className="mr-2 h-4 w-4" />
@@ -478,7 +502,12 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
                 Showcase your work and contributions
               </CardDescription>
             </div>
-            <Button onClick={() => setProjectDialogOpen(true)}>
+            <Button
+              variant="outline"
+              className="backdrop-blur-sm bg-background/50"
+              borderColor="rgba(255, 0, 0, 1)"
+              onClick={() => setProjectDialogOpen(true)}
+            >
               <Plus className="mr-2 h-4 w-4" />
               Add Project
             </Button>
@@ -583,7 +612,12 @@ function FounderUnifiedDashboard({ founder }: any) {
                 <CardTitle>Edit Profile</CardTitle>
                 <CardDescription>Update your company information</CardDescription>
               </div>
-              <Button variant="outline" onClick={() => setIsEditing(false)}>
+              <Button
+                variant="outline"
+                className="backdrop-blur-sm bg-background/50"
+                borderColor="rgba(255, 0, 0, 1)"
+                onClick={() => setIsEditing(false)}
+              >
                 Cancel
               </Button>
             </div>
@@ -631,7 +665,13 @@ function FounderUnifiedDashboard({ founder }: any) {
               </div>
 
               <div className="flex gap-4">
-                <Button type="submit" disabled={updateProfile.isPending}>
+                <Button
+                  type="submit"
+                  variant="outline"
+                  className="backdrop-blur-sm bg-background/50"
+                  borderColor="rgba(255, 0, 0, 1)"
+                  disabled={updateProfile.isPending}
+                >
                   {updateProfile.isPending ? 'Saving...' : 'Save Changes'}
                 </Button>
               </div>
@@ -653,7 +693,12 @@ function FounderUnifiedDashboard({ founder }: any) {
           </div>
           <p className="text-muted-foreground">{founder.position}</p>
         </div>
-        <Button variant="outline" onClick={() => setIsEditing(true)}>
+        <Button
+          variant="outline"
+          className="backdrop-blur-sm bg-background/50"
+          borderColor="rgba(255, 0, 0, 1)"
+          onClick={() => setIsEditing(true)}
+        >
           <Edit className="mr-2 h-4 w-4" />
           Edit Profile
         </Button>
@@ -731,16 +776,18 @@ function FounderUnifiedDashboard({ founder }: any) {
           </CardHeader>
           <CardContent className="space-y-3">
             <Button
-              className="w-full justify-start"
+              className="w-full justify-start backdrop-blur-sm bg-background/50"
               variant="outline"
+              borderColor="rgba(255, 0, 0, 1)"
               onClick={() => router.push('/developers')}
             >
               <Users className="mr-2 h-4 w-4" />
               Browse Developers
             </Button>
             <Button
-              className="w-full justify-start"
+              className="w-full justify-start backdrop-blur-sm bg-background/50"
               variant="outline"
+              borderColor="rgba(255, 0, 0, 1)"
               onClick={() => router.push('/projects')}
             >
               <FolderGit2 className="mr-2 h-4 w-4" />
@@ -749,8 +796,9 @@ function FounderUnifiedDashboard({ founder }: any) {
             <div className="pt-2 border-t">
               <p className="text-xs text-muted-foreground mb-2">Coming Soon:</p>
               <Button
-                className="w-full justify-start"
+                className="w-full justify-start backdrop-blur-sm bg-background/50"
                 variant="outline"
+                borderColor="rgba(255, 0, 0, 1)"
                 disabled
               >
                 <Plus className="mr-2 h-4 w-4" />
