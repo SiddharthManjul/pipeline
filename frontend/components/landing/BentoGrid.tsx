@@ -41,7 +41,7 @@ const BentoCard = ({ title, description, icon: Icon, className, index }: BentoCa
   }
 
   const chamferSize = 24;
-  const strokeWidth = 3;
+  const strokeWidth = 2;
 
   // SVG path for chamfered border
   const getPath = (w: number, h: number, c: number) => {
@@ -63,7 +63,7 @@ const BentoCard = ({ title, description, icon: Icon, className, index }: BentoCa
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
       className={cn(
-        "group relative flex flex-col justify-between overflow-hidden rounded-xl bg-transparent transition-all duration-500 hover:bg-white/5",
+        "group relative flex flex-col justify-between overflow-hidden  bg-transparent transition-all duration-500 hover:bg-white/5",
         className
       )}
       style={{
@@ -90,7 +90,7 @@ const BentoCard = ({ title, description, icon: Icon, className, index }: BentoCa
         style={{
           background: useMotionTemplate`
             radial-gradient(
-              600px circle at ${mouseX}px ${mouseY}px,
+              800px circle at ${mouseX}px ${mouseY}px,
               rgba(249, 115, 22, 0.15),
               transparent 80%
             )
@@ -99,23 +99,23 @@ const BentoCard = ({ title, description, icon: Icon, className, index }: BentoCa
       />
 
       <div className="relative z-30 p-8 flex flex-col h-full">
-        <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-500 group-hover:scale-110 group-hover:bg-primary/20">
-          <Icon className="h-6 w-6" />
+        <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-500 group-hover:scale-110 group-hover:bg-primary/20">
+          <Icon className="h-8 w-8" />
         </div>
-        
+
         <div className="mt-auto">
-          <h3 className="text-xl font-bold text-white mb-2 tracking-tight group-hover:text-primary transition-colors duration-300">
+          <h3 className="text-2xl font-bold text-white mb-3 tracking-tight group-hover:text-primary transition-colors duration-300">
             {title}
           </h3>
-          <p className="text-sm text-muted-foreground leading-relaxed">
+          <p className="text-base text-muted-foreground leading-relaxed">
             {description}
           </p>
         </div>
       </div>
 
       {/* Background patterns/effects */}
-      <div className="absolute bottom-0 right-0 p-4 opacity-5 transition-transform duration-500 group-hover:scale-150 group-hover:opacity-10">
-        <Icon className="h-24 w-24 text-primary" />
+      <div className="absolute bottom-0 right-0 p-4 opacity-5 transition-transform duration-500 group-hover:scale-[2] group-hover:opacity-10">
+        <Icon className="h-32 w-32 text-primary" />
       </div>
     </motion.div>
   );
@@ -174,7 +174,7 @@ export const BentoGrid = () => {
   ];
 
   const globalChamferSize = 48;
-  const globalStrokeWidth = 3;
+  const globalStrokeWidth = 2;
 
   const getGlobalPath = (w: number, h: number, c: number) => {
     const o = globalStrokeWidth / 2;
@@ -189,7 +189,7 @@ export const BentoGrid = () => {
   return (
     <div
       ref={globalRef}
-      className="relative py-8 px-8 overflow-hidden mx-4 md:mx-32 lg:mx-72 bg-black/50 backdrop-blur-md"
+      className="relative py-12 px-12 overflow-hidden mx-4 md:mx-16 lg:mx-32 bg-black/50 backdrop-blur-md"
       style={{
         clipPath: `polygon(0 0, calc(100% - ${globalChamferSize}px) 0, 100% ${globalChamferSize}px, 100% 100%, ${globalChamferSize}px 100%, 0 calc(100% - ${globalChamferSize}px))`,
       }}
@@ -210,7 +210,7 @@ export const BentoGrid = () => {
       </svg>
 
       <div className="container mx-auto relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-6 max-w-6xl mx-auto auto-rows-[220px]">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-6 mx-auto auto-rows-[280px]">
           {features.map((feature, i) => (
             <BentoCard key={feature.title} {...feature} index={i} />
           ))}
