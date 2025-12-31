@@ -2,6 +2,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { LogOut, User, Menu } from 'lucide-react';
 import { useAuth } from '@/lib/hooks';
@@ -60,6 +61,7 @@ export function Navbar({ onAuthModalOpen }: NavbarProps = {}) {
         <div className="flex h-full items-center justify-between">
           {/* Logo */}
           <Link href="/dashboard" className="flex items-center gap-2">
+            <Image src="/logo.png" alt="Credynx Logo" width={48} height={48} className="w-12 h-12" />
             <span className="font-bold text-2xl hidden sm:inline">CREDYNX</span>
           </Link>
 
