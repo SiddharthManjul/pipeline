@@ -40,7 +40,12 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
   if (error || !project) {
     return (
       <div className="space-y-6">
-        <Button variant="ghost" onClick={() => router.back()}>
+        <Button
+          variant="outline"
+          className="backdrop-blur-sm bg-background/50"
+          borderColor="rgba(255, 0, 0, 1)"
+          onClick={() => router.back()}
+        >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back
         </Button>
@@ -98,7 +103,11 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button variant="default" className="gap-2">
+                <Button
+                  variant="outline"
+                  className="gap-2 backdrop-blur-sm bg-background/50"
+                  borderColor="rgba(255, 0, 0, 1)"
+                >
                   <ExternalLink className="h-4 w-4" />
                   View Live Demo
                 </Button>
@@ -108,7 +117,11 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button variant="outline" className="gap-2">
+                <Button
+                  variant="outline"
+                  className="gap-2 backdrop-blur-sm bg-background/50"
+                  borderColor="rgba(255, 0, 0, 1)"
+                >
                   <Github className="h-4 w-4" />
                   View Repository
                 </Button>
@@ -233,7 +246,11 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
                     </p>
                   )}
                 </div>
-                <Button variant="outline">
+                <Button
+                  variant="outline"
+                  className="backdrop-blur-sm bg-background/50"
+                  borderColor="rgba(255, 0, 0, 1)"
+                >
                   View Profile
                   <ExternalLink className="ml-2 h-4 w-4" />
                 </Button>
