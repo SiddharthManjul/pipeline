@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
@@ -15,6 +16,7 @@ import * as z from 'zod';
 import { authApi } from '@/lib/api/auth';
 import { UserRole } from '@/types';
 import Link from 'next/link';
+import { useAuth } from '@/lib/hooks';
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -39,6 +41,7 @@ interface AuthModalProps {
 
 export function AuthModal({ isOpen, onClose, defaultTab = 'login', warningMessage }: AuthModalProps) {
   const router = useRouter();
+  const { login: authLogin, register: authRegister } = useAuth();
   const [activeTab, setActiveTab] = useState(defaultTab);
   const [selectedRole, setSelectedRole] = useState<'DEVELOPER' | 'FOUNDER'>('DEVELOPER');
   const [error, setError] = useState('');
@@ -65,9 +68,9 @@ export function AuthModal({ isOpen, onClose, defaultTab = 'login', warningMessag
     try {
       setIsLoading(true);
       setError('');
-      await authApi.login(data);
-      router.push('/dashboard');
+      await authLogin(data);
       onClose();
+      router.push('/dashboard');
     } catch (err: any) {
       setError(err.response?.data?.message || 'Login failed');
     } finally {
@@ -79,13 +82,13 @@ export function AuthModal({ isOpen, onClose, defaultTab = 'login', warningMessag
     try {
       setIsLoading(true);
       setError('');
-      await authApi.register({
+      await authRegister({
         email: data.email,
         password: data.password,
         role: selectedRole === 'DEVELOPER' ? UserRole.DEVELOPER : UserRole.FOUNDER,
       });
-      router.push('/dashboard');
       onClose();
+      router.push('/dashboard');
     } catch (err: any) {
       setError(err.response?.data?.message || 'Registration failed');
     } finally {
