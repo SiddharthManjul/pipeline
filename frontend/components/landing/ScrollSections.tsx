@@ -5,6 +5,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowBigDownDash, ArrowBigRightIcon, ArrowRight, ArrowRightCircle, ArrowRightCircleIcon } from 'lucide-react';
 import { FuturisticButton as Button } from '@/components/ui/futuristic-button';
+import { ReputationDiagram } from './diagrams/ReputationDiagram';
+import { MatchingDiagram } from './diagrams/MatchingDiagram';
+import { CommunityDiagram } from './diagrams/CommunityDiagram';
 
 interface Section {
   id: string;
@@ -22,11 +25,7 @@ const sections: Section[] = [
     text: 'Showcase your GitHub contributions, projects, and achievements. Our reputation system evaluates your real work, not just your resume.',
     linkText: 'Learn More',
     linkHref: '#reputation',
-    diagram: (
-      <div className="w-full h-full flex items-center justify-center bg-linear-to-br from-primary/20 to-orange-500/10 rounded-2xl border border-primary/30">
-        <div className="text-6xl font-bold text-primary/50">Reputation Diagram</div>
-      </div>
-    ),
+    diagram: <ReputationDiagram />,
   },
   {
     id: 'matching',
@@ -34,11 +33,7 @@ const sections: Section[] = [
     text: 'Get matched with opportunities that align with your skills and experience. Our algorithm connects you with the right founders and projects.',
     linkText: 'Explore Jobs',
     linkHref: '#matching',
-    diagram: (
-      <div className="w-full h-full flex items-center justify-center bg-linear-to-br from-orange-500/20 to-primary/10 rounded-2xl border border-orange-500/30">
-        <div className="text-6xl font-bold text-orange-500/50">Matching Diagram</div>
-      </div>
-    ),
+    diagram: <MatchingDiagram />,
   },
   {
     id: 'community',
@@ -46,11 +41,7 @@ const sections: Section[] = [
     text: 'Connect with other Web3 developers and founders. Share ideas, get vouched by peers, and participate in hackathons.',
     linkText: 'Get Started',
     linkHref: '#community',
-    diagram: (
-      <div className="w-full h-full flex items-center justify-center bg-linear-to-br from-primary/20 to-orange-600/10 rounded-2xl border border-primary/30">
-        <div className="text-6xl font-bold text-primary/50">Community Diagram</div>
-      </div>
-    ),
+    diagram: <CommunityDiagram />,
   },
 ];
 
@@ -107,7 +98,7 @@ export const ScrollSections = () => {
               <h2 className="text-4xl font-bold">
                 {sections[activeSection].headline}
               </h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
+              <p className="text-lg leading-relaxed">
                 {sections[activeSection].text}
               </p>
               <div>
