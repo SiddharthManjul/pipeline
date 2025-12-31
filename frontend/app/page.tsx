@@ -10,6 +10,7 @@ import Link from "next/link";
 import { HeroSection } from "@/components/landing/HeroSection";
 import { Background3D } from "@/components/landing/Background3D";
 import { BentoGrid } from "@/components/landing/BentoGrid";
+import { ScrollSections } from "@/components/landing/ScrollSections";
 import { Navbar } from "@/components/layout/Navbar";
 import { AuthModal } from "@/components/auth/AuthModal";
 
@@ -60,6 +61,9 @@ export default function HomePage() {
         </h3>
         <BentoGrid />
       </div>
+
+      {/* Scroll Sections */}
+      <ScrollSections />
 
       {/* GitHub Login */}
         <div className="py-24 text-center">
