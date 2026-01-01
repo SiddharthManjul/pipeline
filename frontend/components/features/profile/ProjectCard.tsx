@@ -34,7 +34,7 @@ export function ProjectCard({ project, onEdit }: ProjectCardProps) {
 
   return (
     <>
-      <Card className="hover:shadow-lg transition-shadow">
+      <Card className="bg-black/30 backdrop-blur-sm border-primary/20 hover:border-primary/40 transition-all">
         <CardHeader>
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1 space-y-1">

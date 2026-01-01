@@ -15,7 +15,7 @@ export function GitHubStatsCard({ username }: GitHubStatsCardProps) {
 
   if (isLoading) {
     return (
-      <Card>
+      <Card className="bg-black/40 backdrop-blur-md border-primary/20">
         <CardHeader>
           <Skeleton className="h-6 w-32" />
           <Skeleton className="h-4 w-48" />
@@ -33,7 +33,7 @@ export function GitHubStatsCard({ username }: GitHubStatsCardProps) {
 
   if (!stats) {
     return (
-      <Card>
+      <Card className="bg-black/40 backdrop-blur-md border-primary/20">
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
@@ -87,7 +87,7 @@ export function GitHubStatsCard({ username }: GitHubStatsCardProps) {
   ];
 
   return (
-    <Card>
+    <Card className="bg-black/40 backdrop-blur-md border-primary/20">
       <CardHeader>
         <div className="flex items-start justify-between">
           <div>
@@ -106,7 +106,7 @@ export function GitHubStatsCard({ username }: GitHubStatsCardProps) {
             return (
               <div
                 key={item.label}
-                className="flex flex-col items-center p-4 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors"
+                className="flex flex-col items-center p-4 rounded-lg bg-black/30 backdrop-blur-sm border border-primary/10 hover:border-primary/30 transition-all"
               >
                 <Icon className={`h-5 w-5 ${item.color} mb-2`} />
                 <p className="text-2xl font-bold">{item.value.toLocaleString()}</p>

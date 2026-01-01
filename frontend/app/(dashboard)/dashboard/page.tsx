@@ -75,7 +75,7 @@ export default function UnifiedDashboardPage() {
           </p>
         </div>
 
-        <Card className="border-primary">
+        <Card className="border-primary/30 bg-black/40 backdrop-blur-md">
           <CardHeader>
             <CardTitle>Complete Your Profile</CardTitle>
             <CardDescription>
@@ -173,7 +173,7 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
   if (isEditing) {
     return (
       <div className="space-y-6">
-        <Card>
+        <Card className="bg-black/40 backdrop-blur-md border-primary/20">
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
@@ -299,7 +299,7 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
 
       {/* Quick Stats */}
       <div className="grid gap-6 md:grid-cols-4">
-        <Card>
+        <Card className="bg-black/40 backdrop-blur-md border-primary/20">
           <CardHeader className="pb-3">
             <CardDescription>Reputation Score</CardDescription>
           </CardHeader>
@@ -311,7 +311,7 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-black/40 backdrop-blur-md border-primary/20">
           <CardHeader className="pb-3">
             <CardDescription>
               <div className="flex items-center gap-2">
@@ -325,7 +325,7 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-black/40 backdrop-blur-md border-primary/20">
           <CardHeader className="pb-3">
             <CardDescription>
               <div className="flex items-center gap-2">
@@ -340,7 +340,7 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-black/40 backdrop-blur-md border-primary/20">
           <CardHeader className="pb-3">
             <CardDescription>
               <div className="flex items-center gap-2">
@@ -360,7 +360,7 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
       {/* Profile Info & Quick Actions */}
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Profile Information */}
-        <Card className="lg:col-span-2">
+        <Card className="lg:col-span-2 bg-black/40 backdrop-blur-md border-primary/20">
           <CardHeader>
             <CardTitle>Profile Information</CardTitle>
           </CardHeader>
@@ -443,7 +443,7 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
         </Card>
 
         {/* Quick Actions */}
-        <Card>
+        <Card className="bg-black/40 backdrop-blur-md border-primary/20">
           <CardHeader>
             <CardTitle>Quick Actions</CardTitle>
             <CardDescription>Manage your profile</CardDescription>
@@ -493,7 +493,7 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
       )}
 
       {/* Projects Section */}
-      <Card>
+      <Card className="bg-black/40 backdrop-blur-md border-primary/20">
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
@@ -534,7 +534,7 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
 
       {/* Getting Started Tips */}
       {developer.reputationScore < 10 && (
-        <Card className="border-yellow-500/50 bg-yellow-500/5">
+        <Card className="bg-black/40 backdrop-blur-md border-yellow-500/30">
           <CardHeader>
             <CardTitle>💡 Tips to Improve Your Reputation</CardTitle>
             <CardDescription>Complete these actions to increase your visibility</CardDescription>
@@ -605,7 +605,7 @@ function FounderUnifiedDashboard({ founder }: any) {
   if (isEditing) {
     return (
       <div className="space-y-6">
-        <Card>
+        <Card className="bg-black/40 backdrop-blur-md border-primary/20">
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
@@ -707,7 +707,7 @@ function FounderUnifiedDashboard({ founder }: any) {
       {/* Company Information & Quick Actions */}
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Company Profile */}
-        <Card className="lg:col-span-2">
+        <Card className="lg:col-span-2 bg-black/40 backdrop-blur-md border-primary/20">
           <CardHeader>
             <CardTitle>Company Information</CardTitle>
           </CardHeader>
@@ -769,7 +769,7 @@ function FounderUnifiedDashboard({ founder }: any) {
         </Card>
 
         {/* Quick Actions */}
-        <Card>
+        <Card className="bg-black/40 backdrop-blur-md border-primary/20">
           <CardHeader>
             <CardTitle>Quick Actions</CardTitle>
             <CardDescription>Discover developers</CardDescription>
@@ -810,7 +810,7 @@ function FounderUnifiedDashboard({ founder }: any) {
       </div>
 
       {/* Platform Features */}
-      <Card>
+      <Card className="bg-black/40 backdrop-blur-md border-primary/20">
         <CardHeader>
           <CardTitle>Platform Features</CardTitle>
           <CardDescription>Available tools for hiring</CardDescription>
@@ -850,7 +850,7 @@ function FounderUnifiedDashboard({ founder }: any) {
       </Card>
 
       {/* Getting Started Tips */}
-      <Card className="border-blue-500/50 bg-blue-500/5">
+      <Card className="bg-black/40 backdrop-blur-md border-blue-500/30">
         <CardHeader>
           <CardTitle>💡 Getting Started</CardTitle>
           <CardDescription>Make the most of the platform</CardDescription>
