@@ -377,10 +377,11 @@ export function DeveloperProfileView({ developer }: DeveloperProfileViewProps) {
             </p>
           ) : (
             <div className="grid gap-4 md:grid-cols-2">
-              {developer.projects.map((project) => (
+              {developer.projects.map((project, index) => (
                 <ProjectCard
                   key={project.id}
                   project={project}
+                  index={index}
                   onEdit={handleEditProject}
                 />
               ))}
