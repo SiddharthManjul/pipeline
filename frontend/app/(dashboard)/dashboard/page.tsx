@@ -3,7 +3,8 @@
 'use client';
 
 import { useAuth, useMyProfile, useMyReputationScore } from '@/lib/hooks';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { FuturisticCard } from '@/components/ui/futuristic-card';
 import { FuturisticButton as Button } from '@/components/ui/futuristic-button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Separator } from '@/components/ui/separator';
@@ -12,6 +13,7 @@ import { ReputationScore, ReputationBreakdown, TierBadge } from '@/components/fe
 import { GitHubSyncButton, GitHubStatsCard } from '@/components/features/github';
 import { ProjectCard } from '@/components/features/profile/ProjectCard';
 import { ProjectFormDialog } from '@/components/features/profile/ProjectFormDialog';
+import { Background3D } from '@/components/landing/Background3D';
 import {
   FolderGit2,
   Users,
@@ -67,35 +69,37 @@ export default function UnifiedDashboardPage() {
   // If no profile, show onboarding
   if (!hasProfile) {
     return (
-      <div className="space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold">Welcome to Credynx! 👋</h1>
-          <p className="text-muted-foreground mt-2">
+      <div className="space-y-6 relative">
+        <Background3D />
+        <div className="relative z-10">
+          <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-linear-to-r from-white to-orange-500">
+            Welcome to Credynx! 👋
+          </h1>
+          <p className="text-muted-foreground mt-2 text-lg">
             Complete your profile to get started
           </p>
         </div>
 
-        <Card className="border-primary/30 bg-black/40 backdrop-blur-md">
+        <FuturisticCard className="border-primary/30">
           <CardHeader>
-            <CardTitle>Complete Your Profile</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-2xl">Complete Your Profile</CardTitle>
+            <CardDescription className="text-base">
               {isDeveloper && 'Create your developer profile to showcase your work and connect with founders'}
               {isFounder && 'Create your founder profile to discover talented developers'}
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <div className="p-6 pt-0">
             <Button
               size="lg"
               variant="outline"
               className="backdrop-blur-sm bg-background/50"
-              borderColor="rgba(255, 0, 0, 1)"
               onClick={() => router.push('/profile')}
             >
-              <UserIcon className="mr-2 h-4 w-4" />
+              <UserIcon className="mr-2 h-5 w-5" />
               Create Profile Now
             </Button>
-          </CardContent>
-        </Card>
+          </div>
+        </FuturisticCard>
       </div>
     );
   }
@@ -173,24 +177,24 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
   if (isEditing) {
     return (
       <div className="space-y-6">
-        <Card className="bg-black/40 backdrop-blur-md border-primary/20">
+        <Background3D />
+        <FuturisticCard className="border-primary/20" hoverEffect={false}>
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle>Edit Profile</CardTitle>
+                <CardTitle className="text-2xl">Edit Profile</CardTitle>
                 <CardDescription>Update your profile information</CardDescription>
               </div>
               <Button
                 variant="outline"
                 className="backdrop-blur-sm bg-background/50"
-                borderColor="rgba(255, 0, 0, 1)"
                 onClick={() => setIsEditing(false)}
               >
                 Cancel
               </Button>
             </div>
           </CardHeader>
-          <CardContent>
+          <div className="p-6 pt-0">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               {updateProfile.error && (
                 <Alert variant="destructive">
@@ -201,13 +205,13 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
               <div className="grid gap-6 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="fullName">Full Name</Label>
-                  <Input id="fullName" {...register('fullName')} disabled={updateProfile.isPending} />
+                  <Input id="fullName" {...register('fullName')} disabled={updateProfile.isPending} className="bg-white/5 border-white/10" />
                   {errors.fullName && <p className="text-sm text-destructive">{errors.fullName.message}</p>}
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="contactNumber">Contact Number</Label>
-                  <Input id="contactNumber" {...register('contactNumber')} disabled={updateProfile.isPending} />
+                  <Input id="contactNumber" {...register('contactNumber')} disabled={updateProfile.isPending} className="bg-white/5 border-white/10" />
                   {errors.contactNumber && <p className="text-sm text-destructive">{errors.contactNumber.message}</p>}
                 </div>
               </div>
@@ -220,7 +224,7 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
                     defaultValue={developer.availability}
                     disabled={updateProfile.isPending}
                   >
-                    <SelectTrigger id="availability">
+                    <SelectTrigger id="availability" className="bg-white/5 border-white/10">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -233,27 +237,27 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
 
                 <div className="space-y-2">
                   <Label htmlFor="location">Location</Label>
-                  <Input id="location" placeholder="San Francisco, CA" {...register('location')} disabled={updateProfile.isPending} />
+                  <Input id="location" placeholder="San Francisco, CA" {...register('location')} disabled={updateProfile.isPending} className="bg-white/5 border-white/10" />
                 </div>
               </div>
 
               <div className="grid gap-6 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="twitter">Twitter URL</Label>
-                  <Input id="twitter" placeholder="https://twitter.com/username" {...register('twitter')} disabled={updateProfile.isPending} />
+                  <Input id="twitter" placeholder="https://twitter.com/username" {...register('twitter')} disabled={updateProfile.isPending} className="bg-white/5 border-white/10" />
                   {errors.twitter && <p className="text-sm text-destructive">{errors.twitter.message}</p>}
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="linkedin">LinkedIn URL</Label>
-                  <Input id="linkedin" placeholder="https://linkedin.com/in/username" {...register('linkedin')} disabled={updateProfile.isPending} />
+                  <Input id="linkedin" placeholder="https://linkedin.com/in/username" {...register('linkedin')} disabled={updateProfile.isPending} className="bg-white/5 border-white/10" />
                   {errors.linkedin && <p className="text-sm text-destructive">{errors.linkedin.message}</p>}
                 </div>
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="bio">Bio</Label>
-                <Textarea id="bio" rows={4} {...register('bio')} disabled={updateProfile.isPending} />
+                <Textarea id="bio" rows={4} {...register('bio')} disabled={updateProfile.isPending} className="bg-white/5 border-white/10" />
                 {errors.bio && <p className="text-sm text-destructive">{errors.bio.message}</p>}
               </div>
 
@@ -262,34 +266,36 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
                   type="submit"
                   variant="outline"
                   className="backdrop-blur-sm bg-background/50"
-                  borderColor="rgba(255, 0, 0, 1)"
                   disabled={updateProfile.isPending}
                 >
                   {updateProfile.isPending ? 'Saving...' : 'Save Changes'}
                 </Button>
               </div>
             </form>
-          </CardContent>
-        </Card>
+          </div>
+        </FuturisticCard>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8 relative">
+      <Background3D />
+      
       {/* Header with Edit Button */}
-      <div className="flex items-start justify-between">
+      <div className="flex items-start justify-between relative z-10">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <h1 className="text-3xl font-bold">Welcome back, {developer.fullName}! 👋</h1>
+            <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-linear-to-r from-white to-orange-500">
+              Welcome back, {developer.fullName}! 👋
+            </h1>
             <TierBadge tier={developer.tier} size="lg" />
           </div>
-          <p className="text-muted-foreground">@{developer.username}</p>
+          <p className="text-muted-foreground text-lg">@{developer.username}</p>
         </div>
         <Button
           variant="outline"
           className="backdrop-blur-sm bg-background/50"
-          borderColor="rgba(255, 0, 0, 1)"
           onClick={() => setIsEditing(true)}
         >
           <Edit className="mr-2 h-4 w-4" />
@@ -298,268 +304,265 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
       </div>
 
       {/* Quick Stats */}
-      <div className="grid gap-6 md:grid-cols-4">
-        <Card className="bg-black/40 backdrop-blur-md border-primary/20">
-          <CardHeader className="pb-3">
-            <CardDescription>Reputation Score</CardDescription>
-          </CardHeader>
-          <CardContent>
+      <div className="grid gap-6 md:grid-cols-4 relative z-10">
+        <FuturisticCard className="border-primary/20" hoverEffect={false}>
+          <div className="p-6">
+            <p className="text-muted-foreground text-sm font-medium mb-2 uppercase tracking-wider">Reputation Score</p>
             <div className="flex items-end gap-1">
-              <p className="text-3xl font-bold">{developer.reputationScore.toFixed(1)}</p>
+              <p className="text-4xl font-bold text-orange-500">{developer.reputationScore.toFixed(1)}</p>
               <p className="text-muted-foreground pb-1">/ 100</p>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </FuturisticCard>
 
-        <Card className="bg-black/40 backdrop-blur-md border-primary/20">
-          <CardHeader className="pb-3">
-            <CardDescription>
-              <div className="flex items-center gap-2">
-                <FolderGit2 className="h-4 w-4" />
-                Projects
-              </div>
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p className="text-3xl font-bold">{developer.projects?.length || 0}</p>
-          </CardContent>
-        </Card>
+        <FuturisticCard className="border-primary/20" hoverEffect={false}>
+          <div className="p-6">
+            <div className="flex items-center gap-2 text-muted-foreground text-sm font-medium mb-2 uppercase tracking-wider">
+              <FolderGit2 className="h-4 w-4" />
+              Projects
+            </div>
+            <p className="text-4xl font-bold text-white">{developer.projects?.length || 0}</p>
+          </div>
+        </FuturisticCard>
 
-        <Card className="bg-black/40 backdrop-blur-md border-primary/20">
-          <CardHeader className="pb-3">
-            <CardDescription>
-              <div className="flex items-center gap-2">
-                <Users className="h-4 w-4" />
-                Vouches
-              </div>
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p className="text-3xl font-bold">0</p>
-            <p className="text-xs text-muted-foreground">Coming soon</p>
-          </CardContent>
-        </Card>
+        <FuturisticCard className="border-primary/20" hoverEffect={false}>
+          <div className="p-6">
+            <div className="flex items-center gap-2 text-muted-foreground text-sm font-medium mb-2 uppercase tracking-wider">
+              <Users className="h-4 w-4" />
+              Vouches
+            </div>
+            <p className="text-4xl font-bold text-white">0</p>
+            <p className="text-xs text-muted-foreground mt-1">Coming soon</p>
+          </div>
+        </FuturisticCard>
 
-        <Card className="bg-black/40 backdrop-blur-md border-primary/20">
-          <CardHeader className="pb-3">
-            <CardDescription>
-              <div className="flex items-center gap-2">
-                <TrendingUp className="h-4 w-4" />
-                Tier Ranking
-              </div>
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-bold">
+        <FuturisticCard className="border-primary/20" hoverEffect={false}>
+          <div className="p-6">
+            <div className="flex items-center gap-2 text-muted-foreground text-sm font-medium mb-2 uppercase tracking-wider">
+              <TrendingUp className="h-4 w-4" />
+              Tier Ranking
+            </div>
+            <p className="text-3xl font-bold text-white uppercase italic">
               {developer.tier.replace('TIER_', 'Tier ')}
             </p>
-          </CardContent>
-        </Card>
+          </div>
+        </FuturisticCard>
       </div>
 
       {/* Profile Info & Quick Actions */}
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-8 lg:grid-cols-3 relative z-10">
         {/* Profile Information */}
-        <Card className="lg:col-span-2 bg-black/40 backdrop-blur-md border-primary/20">
-          <CardHeader>
-            <CardTitle>Profile Information</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            {/* Bio */}
-            {developer.bio && (
-              <div>
-                <h3 className="font-semibold text-sm text-muted-foreground mb-2">About</h3>
-                <p className="text-sm">{developer.bio}</p>
-              </div>
-            )}
+        <FuturisticCard className="lg:col-span-2 border-primary/20" hoverEffect={false}>
+          <div className="p-6">
+            <h3 className="text-2xl font-bold mb-6">Profile Information</h3>
+            <div className="space-y-6">
+              {/* Bio */}
+              {developer.bio && (
+                <div>
+                  <h3 className="font-semibold text-sm text-muted-foreground mb-2 uppercase tracking-wider">About</h3>
+                  <p className="text-base text-white/90 leading-relaxed">{developer.bio}</p>
+                </div>
+              )}
 
-            <Separator />
+              <Separator className="bg-white/10" />
 
-            {/* Contact & Location */}
-            <div className="grid gap-4 md:grid-cols-2">
-              <div>
-                <h3 className="font-semibold text-sm text-muted-foreground mb-2">Contact</h3>
-                <p className="text-sm">{developer.contactNumber}</p>
-                {developer.location && (
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
-                    <MapPin className="h-4 w-4" />
-                    {developer.location}
+              {/* Contact & Location */}
+              <div className="grid gap-6 md:grid-cols-2">
+                <div>
+                  <h3 className="font-semibold text-sm text-muted-foreground mb-2 uppercase tracking-wider">Contact</h3>
+                  <p className="text-base text-white/90">{developer.contactNumber}</p>
+                  {developer.location && (
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground mt-2">
+                      <MapPin className="h-4 w-4" />
+                      {developer.location}
+                    </div>
+                  )}
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-sm text-muted-foreground mb-2 uppercase tracking-wider">Availability</h3>
+                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10">
+                    <div className={`h-2.5 w-2.5 rounded-full animate-pulse ${availabilityColors[developer.availability as keyof typeof availabilityColors]}`} />
+                    <span className="text-sm font-medium text-white">{availabilityLabels[developer.availability as keyof typeof availabilityLabels]}</span>
                   </div>
-                )}
+                </div>
               </div>
 
+              <Separator className="bg-white/10" />
+
+              {/* Social Links */}
               <div>
-                <h3 className="font-semibold text-sm text-muted-foreground mb-2">Availability</h3>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary">
-                  <div className={`h-2 w-2 rounded-full ${availabilityColors[developer.availability as keyof typeof availabilityColors]}`} />
-                  <span className="text-sm font-medium">{availabilityLabels[developer.availability as keyof typeof availabilityLabels]}</span>
+                <h3 className="font-semibold text-sm text-muted-foreground mb-3 uppercase tracking-wider">Social Links</h3>
+                <div className="flex flex-wrap gap-4">
+                  <a
+                    href={developer.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-sm text-orange-400 hover:text-orange-300 transition-colors"
+                  >
+                    <Github className="h-5 w-5" />
+                    GitHub
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                  {developer.twitter && (
+                    <a
+                      href={developer.twitter}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm text-orange-400 hover:text-orange-300 transition-colors"
+                    >
+                      <Twitter className="h-5 w-5" />
+                      Twitter
+                      <ExternalLink className="h-3 w-3" />
+                    </a>
+                  )}
+                  {developer.linkedin && (
+                    <a
+                      href={developer.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm text-orange-400 hover:text-orange-300 transition-colors"
+                    >
+                      <Linkedin className="h-5 w-5" />
+                      LinkedIn
+                      <ExternalLink className="h-3 w-3" />
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
-
-            <Separator />
-
-            {/* Social Links */}
-            <div>
-              <h3 className="font-semibold text-sm text-muted-foreground mb-3">Social Links</h3>
-              <div className="flex flex-wrap gap-3">
-                <a
-                  href={developer.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-primary hover:underline"
-                >
-                  <Github className="h-4 w-4" />
-                  GitHub
-                  <ExternalLink className="h-3 w-3" />
-                </a>
-                {developer.twitter && (
-                  <a
-                    href={developer.twitter}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-primary hover:underline"
-                  >
-                    <Twitter className="h-4 w-4" />
-                    Twitter
-                    <ExternalLink className="h-3 w-3" />
-                  </a>
-                )}
-                {developer.linkedin && (
-                  <a
-                    href={developer.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-primary hover:underline"
-                  >
-                    <Linkedin className="h-4 w-4" />
-                    LinkedIn
-                    <ExternalLink className="h-3 w-3" />
-                  </a>
-                )}
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+          </div>
+        </FuturisticCard>
 
         {/* Quick Actions */}
-        <Card className="bg-black/40 backdrop-blur-md border-primary/20">
-          <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
-            <CardDescription>Manage your profile</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <Button
-              className="w-full justify-start backdrop-blur-sm bg-background/50"
-              variant="outline"
-              borderColor="rgba(255, 0, 0, 1)"
-              onClick={() => setProjectDialogOpen(true)}
-            >
-              <Plus className="mr-2 h-4 w-4" />
-              Add New Project
-            </Button>
-            <div className="pt-2">
-              <GitHubSyncButton variant="outline" size="default" showText />
+        <FuturisticCard className="border-primary/20" hoverEffect={false}>
+          <div className="p-6">
+            <h3 className="text-2xl font-bold mb-2">Quick Actions</h3>
+            <p className="text-muted-foreground mb-6">Manage your profile</p>
+            <div className="space-y-4">
+              <Button
+                className="w-full justify-start backdrop-blur-sm bg-background/50"
+                variant="outline"
+                onClick={() => setProjectDialogOpen(true)}
+              >
+                <Plus className="mr-2 h-5 w-5" />
+                Add New Project
+              </Button>
+              <div className="pt-2">
+                <GitHubSyncButton variant="outline" size="default" showText />
+              </div>
+              <Button
+                className="w-full justify-start backdrop-blur-sm bg-background/50"
+                variant="outline"
+                onClick={() => router.push('/developers')}
+              >
+                <Users className="mr-2 h-5 w-5" />
+                Browse Developers
+              </Button>
             </div>
-            <Button
-              className="w-full justify-start backdrop-blur-sm bg-background/50"
-              variant="outline"
-              borderColor="rgba(255, 0, 0, 1)"
-              onClick={() => router.push('/developers')}
-            >
-              <Users className="mr-2 h-4 w-4" />
-              Browse Developers
-            </Button>
-          </CardContent>
-        </Card>
+          </div>
+        </FuturisticCard>
       </div>
 
       {/* Reputation Details */}
-      {!reputationLoading && reputationScore && (
-        <div className="grid gap-6 md:grid-cols-2">
-          <ReputationScore
-            score={reputationScore.totalScore}
-            tier={reputationScore.tier}
-          />
-          <ReputationBreakdown breakdown={reputationScore} />
-        </div>
-      )}
+      <div className="relative z-10">
+        {!reputationLoading && reputationScore && (
+          <div className="grid gap-8 md:grid-cols-2">
+            <ReputationScore
+              score={reputationScore.totalScore}
+              tier={reputationScore.tier}
+            />
+            <ReputationBreakdown breakdown={reputationScore} />
+          </div>
+        )}
+      </div>
 
       {/* GitHub Statistics */}
-      {developer.github && (
-        <GitHubStatsCard
-          username={developer.github.split('/').pop() || ''}
-        />
-      )}
+      <div className="relative z-10">
+        {developer.github && (
+          <GitHubStatsCard
+            username={developer.github.split('/').pop() || ''}
+          />
+        )}
+      </div>
 
       {/* Projects Section */}
-      <Card className="bg-black/40 backdrop-blur-md border-primary/20">
-        <CardHeader>
-          <div className="flex items-center justify-between">
+      <FuturisticCard className="border-primary/20 relative z-10" hoverEffect={false}>
+        <div className="p-6">
+          <div className="flex items-center justify-between mb-8">
             <div>
-              <CardTitle>Projects</CardTitle>
-              <CardDescription>
+              <h3 className="text-2xl font-bold">Projects</h3>
+              <p className="text-muted-foreground mt-1 text-base">
                 Showcase your work and contributions
-              </CardDescription>
+              </p>
             </div>
             <Button
               variant="outline"
               className="backdrop-blur-sm bg-background/50"
-              borderColor="rgba(255, 0, 0, 1)"
               onClick={() => setProjectDialogOpen(true)}
             >
-              <Plus className="mr-2 h-4 w-4" />
+              <Plus className="mr-2 h-5 w-5" />
               Add Project
             </Button>
           </div>
-        </CardHeader>
-        <CardContent>
-          {developer.projects?.length === 0 || !developer.projects ? (
-            <p className="text-muted-foreground text-center py-8">
-              No projects yet. Start adding your work to increase your reputation!
-            </p>
-          ) : (
-            <div className="grid gap-4 md:grid-cols-2">
-              {developer.projects.map((project: Project) => (
-                <ProjectCard
-                  key={project.id}
-                  project={project}
-                  onEdit={handleEditProject}
-                />
-              ))}
-            </div>
-          )}
-        </CardContent>
-      </Card>
+
+          <div>
+            {developer.projects?.length === 0 || !developer.projects ? (
+              <div className="text-center py-12 border border-dashed border-white/10 rounded-xl bg-white/5">
+                <p className="text-muted-foreground text-lg">
+                  No projects yet. Start adding your work to increase your reputation!
+                </p>
+              </div>
+            ) : (
+              <div className="grid gap-6 md:grid-cols-2">
+                {developer.projects.map((project: Project, index: number) => (
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    index={index}
+                    onEdit={handleEditProject}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </FuturisticCard>
 
       {/* Getting Started Tips */}
       {developer.reputationScore < 10 && (
-        <Card className="bg-black/40 backdrop-blur-md border-yellow-500/30">
-          <CardHeader>
-            <CardTitle>💡 Tips to Improve Your Reputation</CardTitle>
-            <CardDescription>Complete these actions to increase your visibility</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul className="space-y-2 text-sm">
-              <li className="flex items-start gap-2">
-                <span className="text-yellow-500">•</span>
+        <FuturisticCard className="border-orange-500/30 relative z-10 bg-orange-500/5">
+          <div className="p-6">
+            <h3 className="text-2xl font-bold mb-2">💡 Tips to Improve Your Reputation</h3>
+            <p className="text-muted-foreground mb-6">Complete these actions to increase your visibility</p>
+            <ul className="space-y-4 text-white/80">
+              <li className="flex items-start gap-3">
+                <div className="h-5 w-5 rounded-full bg-orange-500/20 flex items-center justify-center mt-0.5">
+                  <div className="h-2 w-2 rounded-full bg-orange-500" />
+                </div>
                 <span>Add at least 2-3 projects with live demos and GitHub repositories</span>
               </li>
-              <li className="flex items-start gap-2">
-                <span className="text-yellow-500">•</span>
+              <li className="flex items-start gap-3">
+                <div className="h-5 w-5 rounded-full bg-orange-500/20 flex items-center justify-center mt-0.5">
+                  <div className="h-2 w-2 rounded-full bg-orange-500" />
+                </div>
                 <span>Sync your GitHub profile to showcase your contributions</span>
               </li>
-              <li className="flex items-start gap-2">
-                <span className="text-yellow-500">•</span>
+              <li className="flex items-start gap-3">
+                <div className="h-5 w-5 rounded-full bg-orange-500/20 flex items-center justify-center mt-0.5">
+                  <div className="h-2 w-2 rounded-full bg-orange-500" />
+                </div>
                 <span>Complete your profile with bio, location, and social links</span>
               </li>
-              <li className="flex items-start gap-2">
-                <span className="text-yellow-500">•</span>
+              <li className="flex items-start gap-3">
+                <div className="h-5 w-5 rounded-full bg-orange-500/20 flex items-center justify-center mt-0.5">
+                  <div className="h-2 w-2 rounded-full bg-orange-500" />
+                </div>
                 <span>Submit hackathon wins and grant achievements for verification</span>
               </li>
             </ul>
-          </CardContent>
-        </Card>
+          </div>
+        </FuturisticCard>
       )}
 
       {/* Project Form Dialog */}
@@ -605,24 +608,24 @@ function FounderUnifiedDashboard({ founder }: any) {
   if (isEditing) {
     return (
       <div className="space-y-6">
-        <Card className="bg-black/40 backdrop-blur-md border-primary/20">
+        <Background3D />
+        <FuturisticCard className="border-primary/20" hoverEffect={false}>
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle>Edit Profile</CardTitle>
+                <CardTitle className="text-2xl">Edit Profile</CardTitle>
                 <CardDescription>Update your company information</CardDescription>
               </div>
               <Button
                 variant="outline"
                 className="backdrop-blur-sm bg-background/50"
-                borderColor="rgba(255, 0, 0, 1)"
                 onClick={() => setIsEditing(false)}
               >
                 Cancel
               </Button>
             </div>
           </CardHeader>
-          <CardContent>
+          <div className="p-6 pt-0">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               {updateProfile.error && (
                 <Alert variant="destructive">
@@ -633,13 +636,13 @@ function FounderUnifiedDashboard({ founder }: any) {
               <div className="grid gap-6 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="companyName">Company Name</Label>
-                  <Input id="companyName" {...register('companyName')} disabled={updateProfile.isPending} />
+                  <Input id="companyName" {...register('companyName')} disabled={updateProfile.isPending} className="bg-white/5 border-white/10" />
                   {errors.companyName && <p className="text-sm text-destructive">{errors.companyName.message}</p>}
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="position">Position</Label>
-                  <Input id="position" {...register('position')} disabled={updateProfile.isPending} />
+                  <Input id="position" {...register('position')} disabled={updateProfile.isPending} className="bg-white/5 border-white/10" />
                   {errors.position && <p className="text-sm text-destructive">{errors.position.message}</p>}
                 </div>
               </div>
@@ -647,20 +650,20 @@ function FounderUnifiedDashboard({ founder }: any) {
               <div className="grid gap-6 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="companyWebsite">Company Website</Label>
-                  <Input id="companyWebsite" type="url" placeholder="https://example.com" {...register('companyWebsite')} disabled={updateProfile.isPending} />
+                  <Input id="companyWebsite" type="url" placeholder="https://example.com" {...register('companyWebsite')} disabled={updateProfile.isPending} className="bg-white/5 border-white/10" />
                   {errors.companyWebsite && <p className="text-sm text-destructive">{errors.companyWebsite.message}</p>}
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="linkedinUrl">LinkedIn Profile</Label>
-                  <Input id="linkedinUrl" type="url" placeholder="https://linkedin.com/in/username" {...register('linkedinUrl')} disabled={updateProfile.isPending} />
+                  <Input id="linkedinUrl" type="url" placeholder="https://linkedin.com/in/username" {...register('linkedinUrl')} disabled={updateProfile.isPending} className="bg-white/5 border-white/10" />
                   {errors.linkedinUrl && <p className="text-sm text-destructive">{errors.linkedinUrl.message}</p>}
                 </div>
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="bio">Company Bio</Label>
-                <Textarea id="bio" rows={4} {...register('bio')} disabled={updateProfile.isPending} />
+                <Textarea id="bio" rows={4} {...register('bio')} disabled={updateProfile.isPending} className="bg-white/5 border-white/10" />
                 {errors.bio && <p className="text-sm text-destructive">{errors.bio.message}</p>}
               </div>
 
@@ -669,34 +672,33 @@ function FounderUnifiedDashboard({ founder }: any) {
                   type="submit"
                   variant="outline"
                   className="backdrop-blur-sm bg-background/50"
-                  borderColor="rgba(255, 0, 0, 1)"
                   disabled={updateProfile.isPending}
                 >
                   {updateProfile.isPending ? 'Saving...' : 'Save Changes'}
                 </Button>
               </div>
             </form>
-          </CardContent>
-        </Card>
+          </div>
+        </FuturisticCard>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8 relative">
+      <Background3D />
       {/* Header with Edit Button */}
-      <div className="flex items-start justify-between">
+      <div className="flex items-start justify-between relative z-10">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <Building2 className="h-8 w-8 text-primary" />
-            <h1 className="text-3xl font-bold">{founder.companyName}</h1>
+            <Building2 className="h-10 w-10 text-orange-500" />
+            <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-linear-to-r from-white to-orange-500">{founder.companyName}</h1>
           </div>
-          <p className="text-muted-foreground">{founder.position}</p>
+          <p className="text-muted-foreground text-lg">{founder.position}</p>
         </div>
         <Button
           variant="outline"
           className="backdrop-blur-sm bg-background/50"
-          borderColor="rgba(255, 0, 0, 1)"
           onClick={() => setIsEditing(true)}
         >
           <Edit className="mr-2 h-4 w-4" />
@@ -705,177 +707,186 @@ function FounderUnifiedDashboard({ founder }: any) {
       </div>
 
       {/* Company Information & Quick Actions */}
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-8 lg:grid-cols-3 relative z-10">
         {/* Company Profile */}
-        <Card className="lg:col-span-2 bg-black/40 backdrop-blur-md border-primary/20">
-          <CardHeader>
-            <CardTitle>Company Information</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            {/* Bio */}
-            {founder.bio && (
-              <div>
-                <h3 className="font-semibold text-sm text-muted-foreground mb-2">About</h3>
-                <p className="text-sm">{founder.bio}</p>
-              </div>
-            )}
-
-            <Separator />
-
-            {/* Company Details */}
-            <div className="grid gap-4 md:grid-cols-2">
-              {founder.companyWebsite && (
+        <FuturisticCard className="lg:col-span-2 border-primary/20" hoverEffect={false}>
+          <div className="p-6">
+            <h3 className="text-2xl font-bold mb-6">Company Information</h3>
+            <div className="space-y-6">
+              {/* Bio */}
+              {founder.bio && (
                 <div>
-                  <h3 className="font-semibold text-sm text-muted-foreground mb-2">Website</h3>
-                  <a
-                    href={founder.companyWebsite}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-primary hover:underline"
-                  >
-                    <ExternalLink className="h-4 w-4" />
-                    {founder.companyWebsite.replace(/^https?:\/\//, '')}
-                  </a>
+                  <h3 className="font-semibold text-sm text-muted-foreground mb-2 uppercase tracking-wider">About</h3>
+                  <p className="text-base text-white/90 leading-relaxed">{founder.bio}</p>
                 </div>
               )}
 
+              <Separator className="bg-white/10" />
+
+              {/* Company Details */}
+              <div className="grid gap-6 md:grid-cols-2">
+                {founder.companyWebsite && (
+                  <div>
+                    <h3 className="font-semibold text-sm text-muted-foreground mb-2 uppercase tracking-wider">Website</h3>
+                    <a
+                      href={founder.companyWebsite}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm text-orange-400 hover:text-orange-300 transition-colors"
+                    >
+                      <ExternalLink className="h-5 w-5" />
+                      {founder.companyWebsite.replace(/^https?:\/\//, '')}
+                    </a>
+                  </div>
+                )}
+
+                <div>
+                  <h3 className="font-semibold text-sm text-muted-foreground mb-2 uppercase tracking-wider">Member Since</h3>
+                  <p className="text-base text-white/90">{new Date(founder.createdAt).toLocaleDateString()}</p>
+                </div>
+              </div>
+
+              <Separator className="bg-white/10" />
+
+              {/* Social Links */}
               <div>
-                <h3 className="font-semibold text-sm text-muted-foreground mb-2">Member Since</h3>
-                <p className="text-sm">{new Date(founder.createdAt).toLocaleDateString()}</p>
+                <h3 className="font-semibold text-sm text-muted-foreground mb-3 uppercase tracking-wider">Social Links</h3>
+                {founder.linkedinUrl ? (
+                  <a
+                    href={founder.linkedinUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-sm text-orange-400 hover:text-orange-300 transition-colors"
+                  >
+                    <Linkedin className="h-5 w-5" />
+                    LinkedIn
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                ) : (
+                  <p className="text-sm text-muted-foreground italic">No social links added</p>
+                )}
               </div>
             </div>
-
-            <Separator />
-
-            {/* Social Links */}
-            <div>
-              <h3 className="font-semibold text-sm text-muted-foreground mb-3">Social Links</h3>
-              {founder.linkedinUrl ? (
-                <a
-                  href={founder.linkedinUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-primary hover:underline"
-                >
-                  <Linkedin className="h-4 w-4" />
-                  LinkedIn
-                  <ExternalLink className="h-3 w-3" />
-                </a>
-              ) : (
-                <p className="text-sm text-muted-foreground">No social links added</p>
-              )}
-            </div>
-          </CardContent>
-        </Card>
+          </div>
+        </FuturisticCard>
 
         {/* Quick Actions */}
-        <Card className="bg-black/40 backdrop-blur-md border-primary/20">
-          <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
-            <CardDescription>Discover developers</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <Button
-              className="w-full justify-start backdrop-blur-sm bg-background/50"
-              variant="outline"
-              borderColor="rgba(255, 0, 0, 1)"
-              onClick={() => router.push('/developers')}
-            >
-              <Users className="mr-2 h-4 w-4" />
-              Browse Developers
-            </Button>
-            <Button
-              className="w-full justify-start backdrop-blur-sm bg-background/50"
-              variant="outline"
-              borderColor="rgba(255, 0, 0, 1)"
-              onClick={() => router.push('/projects')}
-            >
-              <FolderGit2 className="mr-2 h-4 w-4" />
-              Browse Projects
-            </Button>
-            <div className="pt-2 border-t">
-              <p className="text-xs text-muted-foreground mb-2">Coming Soon:</p>
+        <FuturisticCard className="border-primary/20" hoverEffect={false}>
+          <div className="p-6">
+            <h3 className="text-2xl font-bold mb-2">Quick Actions</h3>
+            <p className="text-muted-foreground mb-6">Discover developers</p>
+            <div className="space-y-4">
               <Button
                 className="w-full justify-start backdrop-blur-sm bg-background/50"
                 variant="outline"
-                borderColor="rgba(255, 0, 0, 1)"
-                disabled
+                onClick={() => router.push('/developers')}
               >
-                <Plus className="mr-2 h-4 w-4" />
-                Post a Job
+                <Users className="mr-2 h-5 w-5" />
+                Browse Developers
               </Button>
+              <Button
+                className="w-full justify-start backdrop-blur-sm bg-background/50"
+                variant="outline"
+                onClick={() => router.push('/projects')}
+              >
+                <FolderGit2 className="mr-2 h-5 w-5" />
+                Browse Projects
+              </Button>
+              <div className="pt-4 border-t border-white/10">
+                <p className="text-xs text-muted-foreground mb-3 uppercase tracking-widest font-bold">Coming Soon</p>
+                <Button
+                  className="w-full justify-start backdrop-blur-sm bg-background/50 opacity-50 cursor-not-allowed"
+                  variant="outline"
+                  disabled
+                >
+                  <Plus className="mr-2 h-5 w-5" />
+                  Post a Job
+                </Button>
+              </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </FuturisticCard>
       </div>
 
       {/* Platform Features */}
-      <Card className="bg-black/40 backdrop-blur-md border-primary/20">
-        <CardHeader>
-          <CardTitle>Platform Features</CardTitle>
-          <CardDescription>Available tools for hiring</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ul className="space-y-3 text-sm">
-            <li className="flex items-start gap-2">
-              <span className="text-green-500 text-xl">✓</span>
+      <FuturisticCard className="border-primary/20 relative z-10" hoverEffect={false}>
+        <div className="p-6">
+          <h3 className="text-2xl font-bold mb-2">Platform Features</h3>
+          <p className="text-muted-foreground mb-8">Available tools for hiring</p>
+          <ul className="grid gap-6 md:grid-cols-2">
+            <li className="flex items-start gap-3">
+              <div className="h-6 w-6 rounded-full bg-green-500/10 flex items-center justify-center shrink-0 mt-0.5">
+                <span className="text-green-500 font-bold">✓</span>
+              </div>
               <div>
-                <p className="font-medium">Browse Verified Developers</p>
+                <p className="font-bold text-lg">Browse Verified Developers</p>
                 <p className="text-muted-foreground">Access tier-ranked developer profiles with reputation scores</p>
               </div>
             </li>
-            <li className="flex items-start gap-2">
-              <span className="text-green-500 text-xl">✓</span>
+            <li className="flex items-start gap-3">
+              <div className="h-6 w-6 rounded-full bg-green-500/10 flex items-center justify-center shrink-0 mt-0.5">
+                <span className="text-green-500 font-bold">✓</span>
+              </div>
               <div>
-                <p className="font-medium">View Developer Projects</p>
+                <p className="font-bold text-lg">View Developer Projects</p>
                 <p className="text-muted-foreground">See live demos and GitHub repositories</p>
               </div>
             </li>
-            <li className="flex items-start gap-2">
-              <span className="text-yellow-500 text-xl">⏳</span>
+            <li className="flex items-start gap-3">
+              <div className="h-6 w-6 rounded-full bg-orange-500/10 flex items-center justify-center shrink-0 mt-0.5">
+                <span className="text-orange-500">⏳</span>
+              </div>
               <div>
-                <p className="font-medium">Post Job Openings</p>
+                <p className="font-bold text-lg">Post Job Openings</p>
                 <p className="text-muted-foreground">Coming soon - AI-powered developer matching</p>
               </div>
             </li>
-            <li className="flex items-start gap-2">
-              <span className="text-yellow-500 text-xl">⏳</span>
+            <li className="flex items-start gap-3">
+              <div className="h-6 w-6 rounded-full bg-orange-500/10 flex items-center justify-center shrink-0 mt-0.5">
+                <span className="text-orange-500">⏳</span>
+              </div>
               <div>
-                <p className="font-medium">Schedule Sessions</p>
+                <p className="font-bold text-lg">Schedule Sessions</p>
                 <p className="text-muted-foreground">Coming soon - Direct developer meetings</p>
               </div>
             </li>
           </ul>
-        </CardContent>
-      </Card>
+        </div>
+      </FuturisticCard>
 
       {/* Getting Started Tips */}
-      <Card className="bg-black/40 backdrop-blur-md border-blue-500/30">
-        <CardHeader>
-          <CardTitle>💡 Getting Started</CardTitle>
-          <CardDescription>Make the most of the platform</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ul className="space-y-2 text-sm">
-            <li className="flex items-start gap-2">
-              <span className="text-blue-500">•</span>
+      <FuturisticCard className="border-blue-500/30 relative z-10 bg-blue-500/5">
+        <div className="p-6">
+          <h3 className="text-2xl font-bold mb-2">💡 Getting Started</h3>
+          <p className="text-muted-foreground mb-6">Make the most of the platform</p>
+          <ul className="space-y-4 text-white/80">
+            <li className="flex items-start gap-3">
+              <div className="h-5 w-5 rounded-full bg-blue-500/20 flex items-center justify-center mt-0.5">
+                <div className="h-2 w-2 rounded-full bg-blue-400" />
+              </div>
               <span>Browse the developer directory to discover talented Web3 developers</span>
             </li>
-            <li className="flex items-start gap-2">
-              <span className="text-blue-500">•</span>
+            <li className="flex items-start gap-3">
+              <div className="h-5 w-5 rounded-full bg-blue-500/20 flex items-center justify-center mt-0.5">
+                <div className="h-2 w-2 rounded-full bg-blue-400" />
+              </div>
               <span>Check developer reputation scores and tier rankings for quality assurance</span>
             </li>
-            <li className="flex items-start gap-2">
-              <span className="text-blue-500">•</span>
+            <li className="flex items-start gap-3">
+              <div className="h-5 w-5 rounded-full bg-blue-500/20 flex items-center justify-center mt-0.5">
+                <div className="h-2 w-2 rounded-full bg-blue-400" />
+              </div>
               <span>Review developer projects to see their work in action</span>
             </li>
-            <li className="flex items-start gap-2">
-              <span className="text-blue-500">•</span>
+            <li className="flex items-start gap-3">
+              <div className="h-5 w-5 rounded-full bg-blue-500/20 flex items-center justify-center mt-0.5">
+                <div className="h-2 w-2 rounded-full bg-blue-400" />
+              </div>
               <span>Complete your company profile to increase credibility</span>
             </li>
           </ul>
-        </CardContent>
-      </Card>
+        </div>
+      </FuturisticCard>
     </div>
   );
 }
