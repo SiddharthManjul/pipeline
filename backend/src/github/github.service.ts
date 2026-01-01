@@ -173,17 +173,23 @@ export class GithubService {
 
   /**
    * Get total contributions from GitHub GraphQL API (most accurate)
+   * Fetches contributions from the past 365 days (rolling 12-month window)
    */
   async getTotalCommits(username: string): Promise<number> {
     try {
-      const currentYear = new Date().getFullYear();
-      const fromDate = `${currentYear}-01-01T00:00:00Z`;
-      const toDate = `${currentYear}-12-31T23:59:59Z`;
+      // Calculate dates for past 365 days
+      const toDate = new Date();
+      const fromDate = new Date();
+      fromDate.setDate(fromDate.getDate() - 365);
+
+      // Format dates for GitHub API (ISO 8601)
+      const fromDateISO = fromDate.toISOString();
+      const toDateISO = toDate.toISOString();
 
       const query = `
         query {
           user(login: "${username}") {
-            contributionsCollection(from: "${fromDate}", to: "${toDate}") {
+            contributionsCollection(from: "${fromDateISO}", to: "${toDateISO}") {
               contributionCalendar {
                 totalContributions
               }
@@ -202,12 +208,17 @@ export class GithubService {
   }
 
   /**
-   * Get total pull request count for a user (current year)
+   * Get total pull request count for a user (past 365 days)
+   * Uses a rolling 12-month window instead of calendar year
    */
   async getTotalPullRequests(username: string): Promise<number> {
     try {
-      const currentYear = new Date().getFullYear();
-      const startDate = `${currentYear}-01-01`;
+      // Calculate date 365 days ago
+      const fromDate = new Date();
+      fromDate.setDate(fromDate.getDate() - 365);
+
+      // Format as YYYY-MM-DD for GitHub search API
+      const startDate = fromDate.toISOString().split('T')[0];
 
       const { data } = await this.octokit.search.issuesAndPullRequests({
         q: `author:${username} type:pr created:>=${startDate}`,
@@ -228,7 +239,7 @@ export class GithubService {
     const profile = await this.getGitHubProfile(username);
     const repositories = await this.getGitHubRepositories(username);
 
-    // Get total commits and PRs (current year)
+    // Get total commits and PRs (past 365 days)
     const [totalCommits, pullRequests] = await Promise.all([
       this.getTotalCommits(username),
       this.getTotalPullRequests(username),
