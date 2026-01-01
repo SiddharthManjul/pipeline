@@ -448,9 +448,7 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
                 <Plus className="mr-2 h-5 w-5" />
                 Add New Project
               </Button>
-              <div className="pt-2">
-                <GitHubSyncButton variant="outline" size="default" showText />
-              </div>
+              <GitHubSyncButton variant="outline" size="default" showText className="w-full justify-start" />
               <Button
                 className="w-full justify-start backdrop-blur-sm bg-background/50"
                 variant="outline"
