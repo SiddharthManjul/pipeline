@@ -38,9 +38,9 @@ const futuristicButtonVariants = cva(
 
 // Default border configurations for each variant
 const defaultBorderConfig = {
-  default: { width: 2, color: "rgba(255, 0, 0, 1)" },
+  default: { width: 2, color: "rgba(249, 115, 22, 1)" },
   destructive: { width: 2, color: "rgba(239, 68, 68, 0.6)" },
-  outline: { width: 2, color: "rgba(255, 0, 0, 1)" },
+  outline: { width: 2, color: "rgba(249, 115, 22, 1)" },
   secondary: { width: 2, color: "rgba(100, 116, 139, 0.6)" },
   ghost: { width: 1.5, color: "rgba(148, 163, 184, 0.4)" },
   link: { width: 0, color: "transparent" },
