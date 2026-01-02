@@ -9,10 +9,10 @@ import { FuturisticButton as Button } from '@/components/ui/futuristic-button';
 interface PublicProjectCardProps {
   project: Project;
   showDeveloper?: boolean;
-  index: number;
+  index?: number;
 }
 
-export function PublicProjectCard({ project, showDeveloper = true, index }: PublicProjectCardProps) {
+export function PublicProjectCard({ project, showDeveloper = true, index = 0 }: PublicProjectCardProps) {
   const isTeamProject = project.teammateNames && project.teammateNames.length > 0;
 
   return (

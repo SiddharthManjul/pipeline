@@ -22,10 +22,10 @@ import { useDeleteProject } from '@/lib/hooks';
 interface ProjectCardProps {
   project: Project;
   onEdit: (project: Project) => void;
-  index: number;
+  index?: number;
 }
 
-export function ProjectCard({ project, onEdit, index }: ProjectCardProps) {
+export function ProjectCard({ project, onEdit, index = 0 }: ProjectCardProps) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const deleteProject = useDeleteProject();
 
