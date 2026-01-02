@@ -161,7 +161,7 @@ export default function DeveloperDetailPage({ params }: { params: Promise<{ id: 
             <div className="grid gap-6 md:grid-cols-2">
               <div>
                 <p className="text-sm text-muted-foreground uppercase tracking-wider mb-2">Reputation Score</p>
-                <p className="text-3xl font-bold text-orange-500">{developer.reputationScore.toFixed(1)}</p>
+                <p className="text-3xl font-bold text-orange-500">{(developer.reputationScore || 0).toFixed(1)}</p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground uppercase tracking-wider mb-2">Tier</p>
