@@ -309,7 +309,7 @@ function DeveloperUnifiedDashboard({ developer, reputationScore, reputationLoadi
           <div className="p-6">
             <p className="text-muted-foreground text-sm font-medium mb-2 uppercase tracking-wider">Reputation Score</p>
             <div className="flex items-end gap-1">
-              <p className="text-4xl font-bold text-orange-500">{developer.reputationScore.toFixed(1)}</p>
+              <p className="text-4xl font-bold text-orange-500">{(developer.reputationScore || 0).toFixed(1)}</p>
               <p className="text-muted-foreground pb-1">/ 100</p>
             </div>
           </div>
