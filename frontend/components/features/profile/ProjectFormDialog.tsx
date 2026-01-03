@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader2, Plus, X } from 'lucide-react';
 import { projectSchema, type ProjectFormData } from '@/lib/validations';
-import { useCreateProject, useUpdateProject } from '@/lib/hooks';
+import { useCreateMyProject, useUpdateMyProject } from '@/lib/hooks';
 import type { Project } from '@/types';
 import { FuturisticButton as Button } from '@/components/ui/futuristic-button';
 import { Input } from '@/components/ui/input';
@@ -30,8 +30,8 @@ interface ProjectFormDialogProps {
 
 export function ProjectFormDialog({ open, onOpenChange, project }: ProjectFormDialogProps) {
   const isEditMode = !!project;
-  const createProject = useCreateProject();
-  const updateProject = useUpdateProject();
+  const createProject = useCreateMyProject();
+  const updateProject = useUpdateMyProject();
   const [technologies, setTechnologies] = useState<string[]>(project?.technologies || []);
   const [techInput, setTechInput] = useState('');
   const [teammates, setTeammates] = useState<string[]>(project?.teammateNames || []);

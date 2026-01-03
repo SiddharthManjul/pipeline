@@ -17,7 +17,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { useDeleteProject } from '@/lib/hooks';
+import { useDeleteMyProject } from '@/lib/hooks';
 
 interface ProjectCardProps {
   project: Project;
@@ -27,7 +27,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, onEdit, index = 0 }: ProjectCardProps) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-  const deleteProject = useDeleteProject();
+  const deleteProject = useDeleteMyProject();
 
   const handleDelete = async () => {
     await deleteProject.mutateAsync(project.id);
