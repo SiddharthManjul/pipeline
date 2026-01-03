@@ -20,14 +20,16 @@ export class FoundersService {
     cursor?: Prisma.FounderWhereUniqueInput;
     where?: Prisma.FounderWhereInput;
     orderBy?: Prisma.FounderOrderByWithRelationInput;
-  }): Promise<Founder[]> {
-    const { skip, take, cursor, where, orderBy } = params;
+    include?: Prisma.FounderInclude;
+  }): Promise<any[]> {
+    const { skip, take, cursor, where, orderBy, include } = params;
     return this.prisma.founder.findMany({
       skip,
       take,
       cursor,
       where,
       orderBy,
+      include,
     });
   }
 
