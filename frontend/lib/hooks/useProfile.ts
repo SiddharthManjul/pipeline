@@ -78,8 +78,8 @@ export function useUpdateProfile() {
   });
 }
 
-// Create project
-export function useCreateProject() {
+// Create project (for current user's profile)
+export function useCreateMyProject() {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -95,8 +95,8 @@ export function useCreateProject() {
   });
 }
 
-// Update project
-export function useUpdateProject() {
+// Update project (for current user's profile)
+export function useUpdateMyProject() {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -113,8 +113,8 @@ export function useUpdateProject() {
   });
 }
 
-// Delete project
-export function useDeleteProject() {
+// Delete project (for current user's profile)
+export function useDeleteMyProject() {
   const queryClient = useQueryClient();
 
   return useMutation({
