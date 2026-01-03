@@ -12,6 +12,7 @@ import { ProjectsModule } from './projects/projects.module.js';
 import { GithubModule } from './github/github.module.js';
 import { ReputationModule } from './reputation/reputation.module.js';
 import { VouchingModule } from './vouching/vouching.module.js';
+import { FoundersModule } from './founders/founders.module.js';
 import { JwtAuthGuard } from './auth/guards/index.js';
 
 @Module({
@@ -28,6 +29,7 @@ import { JwtAuthGuard } from './auth/guards/index.js';
     GithubModule,
     ReputationModule,
     VouchingModule,
+    FoundersModule,
   ],
   controllers: [AppController],
   providers: [
