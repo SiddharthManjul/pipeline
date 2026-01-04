@@ -13,6 +13,12 @@ export class CreateFounderProfileDto {
   @IsNotEmpty()
   @MinLength(2)
   @MaxLength(100)
+  fullName: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(2)
+  @MaxLength(100)
   companyName: string;
 
   @IsString()

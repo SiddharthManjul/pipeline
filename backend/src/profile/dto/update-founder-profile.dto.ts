@@ -12,6 +12,12 @@ export class UpdateFounderProfileDto {
   @IsOptional()
   @MinLength(2)
   @MaxLength(100)
+  fullName?: string;
+
+  @IsString()
+  @IsOptional()
+  @MinLength(2)
+  @MaxLength(100)
   companyName?: string;
 
   @IsString()

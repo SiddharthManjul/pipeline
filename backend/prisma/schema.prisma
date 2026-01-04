@@ -143,6 +143,7 @@ model Founder {
   userId String @unique
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  fullName       String @default("")
   companyName    String
   companyWebsite String?
   position       String
