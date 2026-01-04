@@ -28,6 +28,10 @@ export const updateDeveloperProfileSchema = developerProfileSchema.partial().omi
 });
 
 export const founderProfileSchema = z.object({
+  fullName: z
+    .string()
+    .min(2, 'Full name must be at least 2 characters')
+    .max(100, 'Full name must be at most 100 characters'),
   companyName: z
     .string()
     .min(2, 'Company name must be at least 2 characters')

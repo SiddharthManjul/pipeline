@@ -3,6 +3,7 @@ import apiClient from './client';
 export interface Founder {
   id: string;
   userId: string;
+  fullName: string;
   companyName: string;
   position: string;
   companyWebsite?: string;

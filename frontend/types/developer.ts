@@ -24,6 +24,7 @@ export interface Developer {
 export interface Founder {
   id: string;
   userId: string;
+  fullName: string;
   companyName: string;
   companyWebsite?: string;
   position: string;
@@ -56,6 +57,7 @@ export interface UpdateDeveloperProfileDto {
 }
 
 export interface CreateFounderProfileDto {
+  fullName: string;
   companyName: string;
   position: string;
   companyWebsite?: string;
@@ -64,6 +66,7 @@ export interface CreateFounderProfileDto {
 }
 
 export interface UpdateFounderProfileDto {
+  fullName?: string;
   companyName?: string;
   position?: string;
   companyWebsite?: string;
