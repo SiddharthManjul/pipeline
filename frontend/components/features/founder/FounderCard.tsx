@@ -21,16 +21,16 @@ export function FounderCard({ founder, index = 0 }: FounderCardProps) {
         <CardHeader className="px-0 pt-0 pb-4">
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1 space-y-2">
-              <div className="flex items-center gap-3 flex-wrap">
-                <div className="p-2 rounded-lg bg-orange-500/10 border border-orange-500/30">
-                  <Building2 className="h-5 w-5 text-orange-400" />
-                </div>
-                <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-white to-orange-400 group-hover:to-orange-500 transition-all duration-300 line-clamp-1 flex-1">
+              <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-white to-orange-400 group-hover:to-orange-500 transition-all duration-300 line-clamp-1">
+                {founder.fullName}
+              </CardTitle>
+              <CardDescription className="text-sm text-muted-foreground/90 font-semibold flex items-center gap-2">
+                <span>{founder.position}</span>
+                <span className="text-muted-foreground/50">at</span>
+                <span className="flex items-center gap-1">
+                  <Building2 className="h-3 w-3" />
                   {founder.companyName}
-                </CardTitle>
-              </div>
-              <CardDescription className="text-sm text-muted-foreground/90 font-bold uppercase tracking-widest">
-                {founder.position}
+                </span>
               </CardDescription>
             </div>
 

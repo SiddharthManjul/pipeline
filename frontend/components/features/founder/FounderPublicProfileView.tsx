@@ -9,7 +9,6 @@ import {
   ExternalLink,
   Linkedin,
   Calendar,
-  User,
   Briefcase,
 } from 'lucide-react';
 
@@ -24,19 +23,18 @@ export function FounderPublicProfileView({ founder }: FounderPublicProfileViewPr
       <FuturisticCard className="border-primary/20" hoverEffect={false}>
         <div className="p-6">
           <div className="flex items-start justify-between gap-6">
-            {/* Company Info */}
+            {/* Founder Info */}
             <div className="flex-1">
-              <div className="flex items-center gap-4 mb-3">
-                <div className="p-3 rounded-xl bg-orange-500/10 border border-orange-500/30">
-                  <Building2 className="h-8 w-8 text-orange-400" />
-                </div>
-                <div>
-                  <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-orange-500">
-                    {founder.companyName}
-                  </h1>
-                  <div className="flex items-center gap-2 mt-1">
-                    <User className="h-4 w-4 text-muted-foreground" />
-                    <p className="text-muted-foreground">{founder.position}</p>
+              <div className="mb-3">
+                <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-orange-500 mb-2">
+                  {founder.fullName}
+                </h1>
+                <div className="flex items-center gap-2 text-lg text-muted-foreground">
+                  <span className="font-semibold">{founder.position}</span>
+                  <span className="text-muted-foreground/50">at</span>
+                  <div className="flex items-center gap-2">
+                    <Building2 className="h-4 w-4 text-orange-400" />
+                    <span className="font-semibold text-white/80">{founder.companyName}</span>
                   </div>
                 </div>
               </div>

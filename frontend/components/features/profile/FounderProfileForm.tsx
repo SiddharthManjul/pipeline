@@ -47,6 +47,22 @@ export function FounderProfileForm() {
             </Alert>
           )}
 
+          {/* Full Name */}
+          <div className="space-y-2">
+            <Label htmlFor="fullName">
+              Your Full Name <span className="text-destructive">*</span>
+            </Label>
+            <Input
+              id="fullName"
+              placeholder="John Doe"
+              {...register('fullName')}
+              disabled={createProfile.isPending}
+            />
+            {errors.fullName && (
+              <p className="text-sm text-destructive">{errors.fullName.message}</p>
+            )}
+          </div>
+
           <div className="grid gap-6 md:grid-cols-2">
             {/* Company Name */}
             <div className="space-y-2">
