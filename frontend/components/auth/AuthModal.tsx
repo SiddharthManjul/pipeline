@@ -88,7 +88,8 @@ export function AuthModal({ isOpen, onClose, defaultTab = 'login', warningMessag
         role: selectedRole === 'DEVELOPER' ? UserRole.DEVELOPER : UserRole.FOUNDER,
       });
       onClose();
-      router.push('/dashboard');
+      // Redirect new users directly to profile creation page
+      router.push('/profile');
     } catch (err: any) {
       setError(err.response?.data?.message || 'Registration failed');
     } finally {

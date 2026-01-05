@@ -26,7 +26,7 @@ export function FounderPublicProfileView({ founder }: FounderPublicProfileViewPr
             {/* Founder Info */}
             <div className="flex-1">
               <div className="mb-3">
-                <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-orange-500 mb-2">
+                <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-linear-to-r from-white to-orange-500 mb-2">
                   {founder.fullName}
                 </h1>
                 <div className="flex items-center gap-2 text-lg text-muted-foreground">

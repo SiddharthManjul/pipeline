@@ -69,7 +69,7 @@ export default function UnifiedDashboardPage() {
   // If no profile, show onboarding
   if (!hasProfile) {
     return (
-      <div className="space-y-6 relative">
+      <div className="space-y-8 relative pt-6">
         <Background3D />
         <div className="relative z-10">
           <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-linear-to-r from-white to-orange-500">
@@ -80,8 +80,8 @@ export default function UnifiedDashboardPage() {
           </p>
         </div>
 
-        <FuturisticCard className="border-primary/30">
-          <CardHeader>
+        <FuturisticCard className="border-primary/30 relative z-10">
+          <CardHeader className="pt-3">
             <CardTitle className="text-2xl">Complete Your Profile</CardTitle>
             <CardDescription className="text-base">
               {isDeveloper && 'Create your developer profile to showcase your work and connect with founders'}

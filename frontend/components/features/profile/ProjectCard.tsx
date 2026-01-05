@@ -44,7 +44,7 @@ export function ProjectCard({ project, onEdit, index = 0 }: ProjectCardProps) {
           <CardHeader className="px-0 pt-0 pb-4">
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1 space-y-2">
-                <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-orange-400 group-hover:to-orange-500 transition-all duration-300">
+                <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-white to-orange-400 group-hover:to-orange-500 transition-all duration-300">
                   {project.name}
                 </CardTitle>
                 <CardDescription className="line-clamp-2 text-sm text-muted-foreground/90 leading-relaxed">
