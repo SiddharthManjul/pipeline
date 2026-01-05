@@ -586,6 +586,7 @@ function FounderUnifiedDashboard({ founder }: any) {
   } = useForm<UpdateFounderProfileFormData>({
     resolver: zodResolver(updateFounderProfileSchema),
     defaultValues: {
+      fullName: founder.fullName || '',
       companyName: founder.companyName,
       position: founder.position,
       companyWebsite: founder.companyWebsite || '',
@@ -630,6 +631,12 @@ function FounderUnifiedDashboard({ founder }: any) {
                   <AlertDescription>{updateProfile.error.message}</AlertDescription>
                 </Alert>
               )}
+
+              <div className="space-y-2">
+                <Label htmlFor="fullName">Full Name</Label>
+                <Input id="fullName" {...register('fullName')} disabled={updateProfile.isPending} className="bg-white/5 border-white/10" />
+                {errors.fullName && <p className="text-sm text-destructive">{errors.fullName.message}</p>}
+              </div>
 
               <div className="grid gap-6 md:grid-cols-2">
                 <div className="space-y-2">
@@ -688,11 +695,17 @@ function FounderUnifiedDashboard({ founder }: any) {
       {/* Header with Edit Button */}
       <div className="flex items-start justify-between relative z-10">
         <div>
-          <div className="flex items-center gap-3 mb-2">
-            <Building2 className="h-10 w-10 text-orange-500" />
-            <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-linear-to-r from-white to-orange-500">{founder.companyName}</h1>
+          <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-linear-to-r from-white to-orange-500 mb-2">
+            Welcome back, {founder.fullName}! 👋
+          </h1>
+          <div className="flex items-center gap-2 text-muted-foreground text-lg">
+            <span>{founder.position}</span>
+            <span className="text-muted-foreground/50">at</span>
+            <div className="flex items-center gap-2">
+              <Building2 className="h-4 w-4 text-orange-400" />
+              <span className="text-white/80">{founder.companyName}</span>
+            </div>
           </div>
-          <p className="text-muted-foreground text-lg">{founder.position}</p>
         </div>
         <Button
           variant="outline"
