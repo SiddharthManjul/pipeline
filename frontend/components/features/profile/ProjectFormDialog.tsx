@@ -62,10 +62,6 @@ export function ProjectFormDialog({ open, onOpenChange, project }: ProjectFormDi
   }, [project]);
 
   const onSubmit = async (data: ProjectFormData) => {
-    console.log('Form submitted with data:', data);
-    console.log('Technologies:', technologies);
-    console.log('Teammates:', teammates);
-
     try {
       const projectData = {
         ...data,
@@ -73,23 +69,18 @@ export function ProjectFormDialog({ open, onOpenChange, project }: ProjectFormDi
         teammateNames: teammates,
       };
 
-      console.log('Submitting project data:', projectData);
-
       if (isEditMode) {
-        console.log('Updating project...');
         await updateProject.mutateAsync({ id: project.id, data: projectData });
       } else {
-        console.log('Creating project...');
         await createProject.mutateAsync(projectData);
       }
 
-      console.log('Project saved successfully!');
       reset();
       setTechnologies([]);
       setTeammates([]);
       onOpenChange(false);
     } catch (error) {
-      console.error('Error submitting project:', error);
+      // Error handled by mutation
     }
   };
 
@@ -130,10 +121,7 @@ export function ProjectFormDialog({ open, onOpenChange, project }: ProjectFormDi
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit(onSubmit, (errors) => {
-          console.log('Form validation failed:', errors);
-          console.log('Technologies length:', technologies.length);
-        })} className="space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {error && (
             <Alert variant="destructive">
               <AlertDescription>{error.message}</AlertDescription>

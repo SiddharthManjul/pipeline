@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
@@ -13,7 +12,6 @@ import { Github, Mail, Lock, User, Building2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { authApi } from '@/lib/api/auth';
 import { UserRole } from '@/types';
 import Link from 'next/link';
 import { useAuth } from '@/lib/hooks';
@@ -88,7 +86,6 @@ export function AuthModal({ isOpen, onClose, defaultTab = 'login', warningMessag
         role: selectedRole === 'DEVELOPER' ? UserRole.DEVELOPER : UserRole.FOUNDER,
       });
       onClose();
-      // Redirect new users directly to profile creation page
       router.push('/profile');
     } catch (err: any) {
       setError(err.response?.data?.message || 'Registration failed');

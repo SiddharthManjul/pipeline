@@ -11,9 +11,11 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { useRouter } from 'next/navigation';
 
 export function FounderProfileForm() {
   const createProfile = useCreateFounderProfile();
+  const router = useRouter();
 
   const {
     register,
@@ -26,6 +28,8 @@ export function FounderProfileForm() {
   const onSubmit = async (data: FounderProfileFormData) => {
     try {
       await createProfile.mutateAsync(data);
+      // Redirect to dashboard after successful profile creation
+      router.push('/dashboard');
     } catch (error) {
       // Error handled by mutation
     }

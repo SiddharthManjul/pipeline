@@ -67,6 +67,7 @@ export function ProjectCard({ project, onEdit, index = 0 }: ProjectCardProps) {
                   onClick={() => setShowDeleteDialog(true)}
                 >
                   <Trash2 className="h-4 w-4 text-destructive" />
+                  
                 </Button>
               </div>
             </div>
