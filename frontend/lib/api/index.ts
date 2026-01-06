@@ -5,3 +5,4 @@ export { foundersApi } from './founders';
 export { default as profileApi } from './profile';
 export { default as githubApi } from './github';
 export { default as reputationApi } from './reputation';
+export { vouchingApi } from './vouching';
