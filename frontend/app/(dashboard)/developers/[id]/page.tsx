@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import { use } from 'react';
@@ -9,6 +11,7 @@ import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { TierBadge } from '@/components/features/reputation';
 import { ProjectCard } from '@/components/features/profile/ProjectCard';
+import { VouchButton, VouchList } from '@/components/features/vouching';
 import { useDeveloper, useReputationScore } from '@/lib/hooks';
 import { FuturisticCard } from '@/components/ui/futuristic-card';
 import { Background3D } from '@/components/landing/Background3D';
@@ -77,7 +80,7 @@ export default function DeveloperDetailPage({ params }: { params: Promise<{ id: 
             <div className="flex items-start justify-between">
               <div className="space-y-1">
                 <div className="flex items-center gap-3">
-                  <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-orange-500">
+                  <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-linear-to-r from-white to-orange-500">
                     {developer.fullName}
                   </h1>
                   <Badge className={availabilityColors[developer.availability as keyof typeof availabilityColors]}>
@@ -86,7 +89,10 @@ export default function DeveloperDetailPage({ params }: { params: Promise<{ id: 
                 </div>
                 <p className="text-muted-foreground text-lg">@{developer.username}</p>
               </div>
-              <TierBadge tier={developer.tier} size="lg" />
+              <div className="flex items-center gap-3">
+                <VouchButton developer={developer} />
+                <TierBadge tier={developer.tier} size="lg" />
+              </div>
             </div>
           </CardHeader>
           <div className="space-y-6">
@@ -178,7 +184,7 @@ export default function DeveloperDetailPage({ params }: { params: Promise<{ id: 
           <CardHeader className="px-0 pt-0 mb-8">
             <CardTitle className="text-2xl font-bold">Projects</CardTitle>
             <CardDescription className="text-base">
-              Developer's work and contributions
+              Developer&apos;s work and contributions
             </CardDescription>
           </CardHeader>
           <div>
@@ -199,6 +205,19 @@ export default function DeveloperDetailPage({ params }: { params: Promise<{ id: 
               </div>
             )}
           </div>
+        </div>
+      </FuturisticCard>
+
+      {/* Vouches Section */}
+      <FuturisticCard className="border-primary/20 relative z-10" hoverEffect={false}>
+        <div className="p-6">
+          <CardHeader className="px-0 pt-0 mb-8">
+            <CardTitle className="text-2xl font-bold">Vouches</CardTitle>
+            <CardDescription className="text-base">
+              Endorsements from other developers
+            </CardDescription>
+          </CardHeader>
+          <VouchList developerId={developer.id} />
         </div>
       </FuturisticCard>
     </div>
