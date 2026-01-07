@@ -27,10 +27,16 @@ export class ProfileService {
             vouchesReceived: {
               where: { isActive: true },
               include: {
-                voucher: {
+                developerVoucher: {
                   select: {
                     username: true,
                     tier: true,
+                  },
+                },
+                founderVoucher: {
+                  select: {
+                    fullName: true,
+                    companyName: true,
                   },
                 },
               },

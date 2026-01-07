@@ -59,8 +59,11 @@ export class ReputationService {
           vouchesReceived: {
             where: { isActive: true },
             include: {
-              voucher: {
+              developerVoucher: {
                 select: { tier: true },
+              },
+              founderVoucher: {
+                select: { id: true },
               },
             },
           },
