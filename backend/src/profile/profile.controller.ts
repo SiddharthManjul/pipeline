@@ -84,13 +84,13 @@ export class ProfileController {
   @Get('me/projects')
   async getMyProjects(@CurrentUser() user: User) {
     const profile = await this.profileService.getFullProfile(user.id);
-    if (!profile.developer) {
+    if (!(profile as any).developer) {
       throw new HttpException(
         'Only developers can have projects',
         HttpStatus.FORBIDDEN,
       );
     }
-    return this.projectsService.findProjectsByDeveloper(profile.developer.id);
+    return this.projectsService.findProjectsByDeveloper((profile as any).developer.id);
   }
 
   @Post('me/projects')
@@ -99,14 +99,14 @@ export class ProfileController {
     @Body() createProjectDto: CreateProjectDto,
   ) {
     const profile = await this.profileService.getFullProfile(user.id);
-    if (!profile.developer) {
+    if (!(profile as any).developer) {
       throw new HttpException(
         'Only developers can create projects',
         HttpStatus.FORBIDDEN,
       );
     }
     return this.projectsService.createProject({
-      developer: { connect: { id: profile.developer.id } },
+      developer: { connect: { id: (profile as any).developer.id } },
       ...createProjectDto,
     });
   }
@@ -118,7 +118,7 @@ export class ProfileController {
     @Body() updateProjectDto: UpdateProjectDto,
   ) {
     const profile = await this.profileService.getFullProfile(user.id);
-    if (!profile.developer) {
+    if (!(profile as any).developer) {
       throw new HttpException(
         'Only developers can update projects',
         HttpStatus.FORBIDDEN,
@@ -127,7 +127,7 @@ export class ProfileController {
 
     // Verify project belongs to this developer
     const project = await this.projectsService.findProjectById(projectId);
-    if (!project || project.developerId !== profile.developer.id) {
+    if (!project || project.developerId !== (profile as any).developer.id) {
       throw new HttpException(
         'Project not found or access denied',
         HttpStatus.NOT_FOUND,
@@ -146,7 +146,7 @@ export class ProfileController {
     @Param('id') projectId: string,
   ) {
     const profile = await this.profileService.getFullProfile(user.id);
-    if (!profile.developer) {
+    if (!(profile as any).developer) {
       throw new HttpException(
         'Only developers can delete projects',
         HttpStatus.FORBIDDEN,
@@ -155,7 +155,7 @@ export class ProfileController {
 
     // Verify project belongs to this developer
     const project = await this.projectsService.findProjectById(projectId);
-    if (!project || project.developerId !== profile.developer.id) {
+    if (!project || project.developerId !== (profile as any).developer.id) {
       throw new HttpException(
         'Project not found or access denied',
         HttpStatus.NOT_FOUND,

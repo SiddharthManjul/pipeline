@@ -17,10 +17,15 @@ import { CurrentUser } from '../auth/decorators/current-user.decorator.js';
 interface UserWithDeveloper {
   id: string;
   email: string;
-  developer: {
+  role: string;
+  developer?: {
     id: string;
     username: string;
     tier: string;
+  };
+  founder?: {
+    id: string;
+    companyName: string;
   };
 }
 
@@ -38,8 +43,15 @@ export class VouchingController {
     @CurrentUser() user: UserWithDeveloper,
     @Body() createVouchDto: CreateVouchDto,
   ) {
-    const voucherId = user.developer.id;
-    return this.vouchingService.createVouch(voucherId, createVouchDto);
+    // Support both developers and founders vouching
+    const isFounder = user.role === 'FOUNDER' && !!user.founder;
+    const voucherId = isFounder ? user.founder!.id : user.developer?.id;
+
+    if (!voucherId) {
+      throw new Error('User must be a developer or founder to vouch');
+    }
+
+    return this.vouchingService.createVouch(voucherId, createVouchDto, isFounder);
   }
 
   /**
@@ -63,7 +75,7 @@ export class VouchingController {
    */
   @Get('my-vouches')
   async getMyVouches(@CurrentUser() user: UserWithDeveloper) {
-    const developerId = user.developer.id;
+    const developerId = user.developer!.id;
     return this.vouchingService.getVouchesGivenByDeveloper(developerId);
   }
 
@@ -77,7 +89,7 @@ export class VouchingController {
     @CurrentUser() user: UserWithDeveloper,
     @Body('reason') reason?: string,
   ) {
-    const voucherId = user.developer.id;
+    const voucherId = user.developer!.id;
     return this.vouchingService.revokeVouch(vouchId, voucherId, reason);
   }
 }
