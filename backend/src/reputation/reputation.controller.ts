@@ -53,12 +53,20 @@ export class ReputationController {
 
   /**
    * Get reputation score for a developer
-   * Public endpoint
+   * Public endpoint - Auto-calculates if not found
    */
   @Public()
   @Get(':developerId')
   async getReputation(@Param('developerId') developerId: string) {
-    return this.reputationService.getReputation(developerId);
+    try {
+      return await this.reputationService.getReputation(developerId);
+    } catch (error) {
+      // If no reputation found, calculate it automatically
+      if ((error as any).status === 404) {
+        return await this.reputationService.calculateReputation(developerId);
+      }
+      throw error;
+    }
   }
 
   /**

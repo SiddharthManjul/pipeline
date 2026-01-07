@@ -324,7 +324,8 @@ export class ReputationService {
 
     // Calculate weighted vouch score
     const vouchScore = vouches.reduce((sum: number, vouch: any) => {
-      const voucherTier = vouch.voucher.tier;
+      // Handle both developer and founder vouchers
+      const voucherTier = vouch.developerVoucher?.tier || vouch.voucherTier;
       const weight = VOUCH_WEIGHTS[voucherTier] || 1.0;
       return sum + weight;
     }, 0);
