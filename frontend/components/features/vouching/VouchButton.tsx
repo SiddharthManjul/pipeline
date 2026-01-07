@@ -22,31 +22,42 @@ interface VouchButtonProps {
 
 export function VouchButton({
   developer,
-  variant = 'outline',
+  variant = 'default',
   size = 'default',
   showLabel = true
 }: VouchButtonProps) {
   const [dialogOpen, setDialogOpen] = useState(false);
-  const { user, isDeveloper } = useAuth();
+  const { user, isDeveloper, isFounder } = useAuth();
   const { data: eligibility, isLoading } = useVouchEligibility(developer.id);
 
-  // Don't show button if user is not a developer or if vouching themselves
+  // Don't show button if user is neither developer nor founder
+  // Also don't show if developer is trying to vouch for themselves
   const currentDeveloperId = user && 'developer' in user ? (user as any).developer?.id : null;
-  if (!isDeveloper || currentDeveloperId === developer.id) {
+
+  if (!isDeveloper && !isFounder) {
     return null;
   }
 
-  const isEligible = eligibility?.isEligible ?? false;
+  // Don't let developers vouch for themselves
+  if (isDeveloper && currentDeveloperId === developer.id) {
+    return null;
+  }
+
+  const isEligible = eligibility?.isEligible ?? true; // Default to true if loading
   const reasons = eligibility?.reasonsNotEligible ?? [];
+
+  const handleClick = () => {
+    setDialogOpen(true);
+  };
 
   const buttonContent = (
     <Button
       variant={variant}
       size={size}
-      onClick={() => setDialogOpen(true)}
-      disabled={isLoading || !isEligible}
-      borderColor="rgba(255, 0, 0, 1)"
-      className="gap-2"
+      onClick={handleClick}
+      disabled={isLoading}
+      borderColor="rgba(249, 115, 22, 1)"
+      className="gap-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold transition-all hover:scale-105"
     >
       <Award className="h-4 w-4" />
       {showLabel && 'Vouch'}
@@ -61,9 +72,9 @@ export function VouchButton({
             <TooltipTrigger asChild>
               {buttonContent}
             </TooltipTrigger>
-            <TooltipContent className="max-w-xs">
-              <p className="font-semibold mb-1">Cannot vouch:</p>
-              <ul className="list-disc list-inside text-sm">
+            <TooltipContent className="max-w-xs bg-black/95 border border-orange-500/20">
+              <p className="font-semibold mb-1 text-orange-400">Cannot vouch:</p>
+              <ul className="list-disc list-inside text-sm text-white/80">
                 {reasons.map((reason, idx) => (
                   <li key={idx}>{reason}</li>
                 ))}

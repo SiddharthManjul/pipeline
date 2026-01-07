@@ -1,15 +1,20 @@
 import { Badge } from '@/components/ui/badge';
 import { DeveloperTier } from '@/types';
-import { Crown, Award, Star, Rocket } from 'lucide-react';
+import { Crown, Award, Star, Rocket, Briefcase } from 'lucide-react';
 
 interface TierBadgeProps {
-  tier: DeveloperTier;
+  tier: DeveloperTier | 'FOUNDER';
   size?: 'sm' | 'md' | 'lg';
   showIcon?: boolean;
   showLabel?: boolean;
 }
 
-const tierConfig = {
+const tierConfig: Record<string, {
+  label: string;
+  color: string;
+  icon: any;
+  description: string;
+}> = {
   TIER_1: {
     label: 'Elite',
     color: 'bg-gradient-to-r from-purple-500 to-pink-500 text-white',
@@ -34,6 +39,12 @@ const tierConfig = {
     icon: Rocket,
     description: 'Starting - 0-25 reputation',
   },
+  FOUNDER: {
+    label: 'Founder',
+    color: 'bg-gradient-to-r from-orange-500 to-red-500 text-white',
+    icon: Briefcase,
+    description: 'Company Founder',
+  },
 };
 
 const sizeClasses = {
@@ -55,6 +66,16 @@ export function TierBadge({
   showLabel = true
 }: TierBadgeProps) {
   const config = tierConfig[tier];
+
+  // Fallback if tier is undefined or invalid
+  if (!config) {
+    return (
+      <Badge className="bg-gray-500 text-white text-xs px-2 py-0.5">
+        Unknown
+      </Badge>
+    );
+  }
+
   const Icon = config.icon;
 
   return (

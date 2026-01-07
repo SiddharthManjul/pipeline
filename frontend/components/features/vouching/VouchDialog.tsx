@@ -76,13 +76,13 @@ export function VouchDialog({ open, onOpenChange, developer }: VouchDialogProps)
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-2xl bg-transparent border-none shadow-none">
+      <DialogContent className="sm:max-w-2xl bg-black/95 border border-orange-500/20 backdrop-blur-sm">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-center bg-linear-to-r from-primary to-orange-600 bg-clip-text text-transparent">
+          <DialogTitle className="text-2xl font-bold text-center bg-linear-to-r from-white to-orange-500 bg-clip-text text-transparent">
             Vouch for {developer.fullName}
           </DialogTitle>
           <DialogDescription className="text-center text-muted-foreground mt-2">
-            Endorse this developer's skills and add your vouch to boost their reputation
+            Endorse this developer&apos;s skills and add your vouch to boost their reputation
           </DialogDescription>
         </DialogHeader>
 
@@ -111,7 +111,7 @@ export function VouchDialog({ open, onOpenChange, developer }: VouchDialogProps)
             </div>
 
             {/* Skills Tags */}
-            <div className="flex flex-wrap gap-2 min-h-[2rem]">
+            <div className="flex flex-wrap gap-2 min-h-8">
               {skills.map((skill) => (
                 <Badge
                   key={skill}
@@ -155,20 +155,23 @@ export function VouchDialog({ open, onOpenChange, developer }: VouchDialogProps)
           </div>
 
           {/* Submit Button */}
-          <DialogFooter>
+          <DialogFooter className="gap-3">
             <Button
               type="button"
               variant="outline"
               onClick={() => onOpenChange(false)}
               disabled={createVouch.isPending}
+              className="border-white/20 text-white hover:bg-white/10"
             >
               Cancel
             </Button>
             <Button
               type="submit"
               disabled={createVouch.isPending || skills.length === 0}
-              borderColor="rgba(255, 0, 0, 1)"
+              borderColor="rgba(249, 115, 22, 1)"
+              className="bg-orange-500 hover:bg-orange-600 text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
             >
+              <Award className="h-4 w-4 mr-2" />
               {createVouch.isPending ? 'Creating Vouch...' : 'Vouch for Developer'}
             </Button>
           </DialogFooter>
