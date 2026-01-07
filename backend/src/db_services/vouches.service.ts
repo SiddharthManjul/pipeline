@@ -67,11 +67,17 @@ export class VouchesService {
         isActive: true,
       },
       include: {
-        voucher: {
+        developerVoucher: {
           select: {
             username: true,
             fullName: true,
             tier: true,
+          },
+        },
+        founderVoucher: {
+          select: {
+            fullName: true,
+            companyName: true,
           },
         },
       },

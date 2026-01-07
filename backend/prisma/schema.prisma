@@ -153,7 +153,8 @@ model Founder {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  jobs Job[]
+  jobs         Job[]
+  vouchesGiven Vouch[] @relation("FounderVoucherRelation")
 }
 
 model Project {
@@ -213,10 +214,18 @@ model ReputationHistory {
 }
 
 model Vouch {
-  id          String        @id @default(uuid())
-  voucherId   String
-  voucher     Developer     @relation("VoucherRelation", fields: [voucherId], references: [id], onDelete: Cascade)
-  voucherTier DeveloperTier
+  id           String  @id @default(uuid())
+  voucherId    String
+  voucherType  String  @default("DEVELOPER") // "DEVELOPER" or "FOUNDER"
+
+  // Optional relations - only one will be populated based on voucherType
+  developerVoucher Developer? @relation("VoucherRelation", fields: [developerVoucherId], references: [id], onDelete: Cascade)
+  developerVoucherId String?
+
+  founderVoucher   Founder? @relation("FounderVoucherRelation", fields: [founderVoucherId], references: [id], onDelete: Cascade)
+  founderVoucherId String?
+
+  voucherTier  DeveloperTier?
 
   vouchedUserId   String
   vouchedUser     Developer     @relation("VouchedUserRelation", fields: [vouchedUserId], references: [id], onDelete: Cascade)
@@ -231,8 +240,9 @@ model Vouch {
   revokedAt    DateTime?
   revokeReason String?   @db.Text
 
-  @@unique([voucherId, vouchedUserId])
   @@index([voucherId])
+  @@index([developerVoucherId])
+  @@index([founderVoucherId])
   @@index([vouchedUserId])
   @@index([isActive])
 }

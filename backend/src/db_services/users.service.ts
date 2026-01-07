@@ -81,7 +81,13 @@ export class UsersService {
   }
 
   async findById(id: string): Promise<User | null> {
-    return this.user({ id });
+    return this.prisma.user.findUnique({
+      where: { id },
+      include: {
+        developer: true,
+        founder: true,
+      },
+    });
   }
 
   async create(data: Prisma.UserCreateInput): Promise<User> {
